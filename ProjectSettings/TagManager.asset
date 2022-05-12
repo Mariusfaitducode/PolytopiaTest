@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - CaseCube
+  - bois
   layers:
   - Default
   - TransparentFX

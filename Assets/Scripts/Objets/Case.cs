@@ -14,6 +14,8 @@ public class Case
     private Vector2 tabRef;
     private Vector3 position;
 
+    public float surfaceHeight;
+
     public float altitude = 60f;
     
     //private GameObject personnage;
@@ -27,33 +29,30 @@ public class Case
         tabRef.x = x;
         tabRef.y = y;
 
-        float height;  //Hauteur de la surface du cube
-        
+        //float height;  //Hauteur de la surface du cube
         //float height = region.height * altitude;
 
         if (typeRegion.name.Equals("Water"))
         {
-            height = 0.4f * Constants.altitude;
+            surfaceHeight = 0.4f * Constants.altitude;
         }
         else
         {
-            height = currentHeight * Constants.altitude;
-            //height = region.height * altitude;
+            //surfaceHeight = currentHeight * Constants.altitude;
+            surfaceHeight = region.height * altitude;
         }
 
         position = new Vector3();
         position.x = (tabRef.x * Constants.CaseSize) - Constants.MapWidth * Constants.CaseSize / 2 + Constants.CaseSize / 2;
-        position.y = height / 2;
+        position.y = surfaceHeight / 2;
         position.z = (tabRef.y * Constants.CaseSize) - Constants.MapHeight * Constants.CaseSize / 2 + Constants.CaseSize / 2;
 
         caseCube.transform.position = position;
 
-        caseCube.transform.localScale = new Vector3(Constants.CaseSize, height, Constants.CaseSize);
+        caseCube.transform.localScale = new Vector3(Constants.CaseSize, surfaceHeight, Constants.CaseSize);
         
         obj.GetComponent<MeshRenderer>().material.color = region.colour;
 
         obj.GetComponent<BlockCase>().tabRef = tabRef;
     }
-
-    
 }

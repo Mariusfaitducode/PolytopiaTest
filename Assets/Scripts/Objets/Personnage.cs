@@ -31,13 +31,20 @@ public class Personnage : MonoBehaviour
 
         return position;
     }
-    public Vector3 ReturnCase()
+    public Vector3 ReturnCaseRef()
     {
         int tabX = (int)((transform.position.x ) / Constants.CaseSize + Constants.MapWidth/2)  ;
         int tabY = (int)((transform.position.z )/ Constants.CaseSize + Constants.MapHeight/2);
         Vector3 position = new Vector3( tabX, transform.position.y, tabY);
 
         return position;
+    }
+
+    public Case ReturnCase()
+    {
+        int i = (int)ReturnCaseRef().x;
+        int j = (int)ReturnCaseRef().z;
+        return plateau.grid[i, j];
     }
     private void OnMouseDown() //Choix de la caméra -> controle du personnage
     {
@@ -57,17 +64,10 @@ public class Personnage : MonoBehaviour
         }
     }
 
-    void Start()
+    void Update()
     {
-        
-        //int i = (int)ReturnCase().x;
-        //int j = (int)ReturnCase().z;
-        //height = plateau.grid[i, j].typeRegion.height * plateau.grid[i,j].altitude + 1;
-        //height = transform.position.y;
-    }
+        //mouv.mouvCam = playerCam.GetComponent<CameraMouvement>();
 
-    void FixedUpdate()
-    {
         if ( _isSelect )
         {
             height = transform.position.y;
@@ -75,21 +75,15 @@ public class Personnage : MonoBehaviour
             
             if (mouv.KeyDeplacement(vitesse))
             {
-                //print(ReturnPlateauPos());
-                //print(ReturnCase());
-                
-                int i = (int)ReturnCase().x;
-                int j = (int)ReturnCase().z;
-
-                //float newHeight = plateau.grid[i, j].typeRegion.height * plateau.grid[i,j].altitude + 1;
-                float newHeight = plateau.grid[i, j].caseCube.transform.position.y * 2 + 1;
+                Case actualCase = ReturnCase();
+                float newHeight = actualCase.caseCube.transform.position.y * 2 + 1;
                 
                 print(height + " // " + newHeight);
 
                 if (height + 4f >= newHeight)
                 {
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x,newHeight,gameObject.transform.position.z);
-                    print(plateau.grid[i,j].typeRegion.name);
+                    print(actualCase.typeRegion.name);
                     height = newHeight;
                 }
                 else
@@ -97,8 +91,10 @@ public class Personnage : MonoBehaviour
                     gameObject.transform.position = lastPos;
                 }
             }
-            mouv.KeyRotation();
+            else
+            {
+                mouv.KeyRotation();
+            }
         }
     }
-
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Deplacements : MonoBehaviour
 {
-    
+    public CameraMouvement mouvCam;
     public bool KeyDeplacement(float vitesse)
     {
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0 && !Input.GetKey(KeyCode.RightShift))
@@ -13,8 +13,10 @@ public class Deplacements : MonoBehaviour
             transform.Translate(Vector3.right * vitesse * Time.fixedDeltaTime * Input.GetAxis("Horizontal"));
             return true;
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     public bool KeyRotation()
@@ -24,7 +26,9 @@ public class Deplacements : MonoBehaviour
             transform.Rotate(Vector3.up * 90f * Time.fixedDeltaTime * Input.GetAxis("Horizontal"));
             return true;
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
     }
 }
