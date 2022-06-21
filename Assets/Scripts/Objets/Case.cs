@@ -20,7 +20,7 @@ public class Case
     
     //private GameObject personnage;
 
-    public Case( CaseType.TerrainType region, float currentHeight, int x, int y, GameObject obj)
+    public Case( CaseType.TerrainType region, int x, int y, GameObject obj)
     {
         typeRegion = region;
         

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography;
+using TMPro;
 using UnityEngine;
 
 public class CaseActions : MonoBehaviour
@@ -10,6 +11,8 @@ public class CaseActions : MonoBehaviour
     //public Personnage player;
 
     //public PlateauJeu plateau;
+
+    public Canvas canvas;
 
     public Inventaire invent;
 
@@ -29,26 +32,36 @@ public class CaseActions : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        print("CUUUT THIS TREE");
-        print(other);
+        //print("CUUUT THIS TREE");
+        //print(other);
         if (Input.GetKey(KeyCode.Space))
         {
-            print("destroy");
+            //print("destroy");
 
             Item item = invent.FindWithName(other.gameObject.tag);
 
-            if ( item != default)
+            if ( item != default) //Actualiser le nombre d'objets
             {
                 item.IncrementQuantite();
+                item.itemOnScreen.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name + "\n"+ item.quantite);
             }
-            else
+            else    //Nouvel objet dans l'inventaire
             {
                 invent.collection.Add(new Item(other.gameObject.tag));
+                item = invent.FindWithName(other.gameObject.tag);
+                
+                item.itemOnScreen = Instantiate(invent.itemDispPF);
+                item.itemOnScreen.transform.parent = canvas.transform;
+                item.itemOnScreen.transform.position = new Vector3(invent.collection.Count * 200,100,0);
+                
+                item.itemOnScreen.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name + "\n"+ item.quantite);
             }
             
             invent.DispList();
             
             Destroy(other.gameObject);
+
+            //invent.actualize = true;
         }
     }
 

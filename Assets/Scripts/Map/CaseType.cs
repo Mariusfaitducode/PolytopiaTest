@@ -5,7 +5,8 @@ using UnityEngine;
 public class CaseType 
 {
     [System.Serializable]
-    public struct TerrainType {
+    public struct TerrainType 
+    {
         public string name;
         public float height;
         public Color colour;

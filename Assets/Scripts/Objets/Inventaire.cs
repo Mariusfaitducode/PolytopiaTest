@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Inventaire : MonoBehaviour
 {
-    
+    public bool actualize;
+    public GameObject itemDispPF;
 
     public List<Item> collection;
     // Start is called before the first frame update

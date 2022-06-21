@@ -4,34 +4,53 @@ using UnityEngine;
 
 public class CameraMouvement : MonoBehaviour
 {
-    public bool activate;
+    //public bool activate;
 
-    public void KeyDeplacement()
+    public bool KeyDeplacement()
     {
-        if (Input.GetKey(KeyCode.C))
+        
+        
+        if (Input.GetKey(KeyCode.U))
         {
-            activate = true;
-            if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
-            {
-                //Zoom camera
-                transform.Translate(Vector3.forward * 90f * Time.fixedDeltaTime * Input.GetAxis("Horizontal"));
-                //transform.Translate(Vector3.right * vitesse * Time.fixedDeltaTime * Input.GetAxis("Horizontal"));
+            transform.Translate(Vector3.forward * 15f * Time.fixedDeltaTime); //Avance sur z
             
-                //Rotation camera
-                transform.Rotate(Vector3.right * 90f * Time.fixedDeltaTime * Input.GetAxis("Vertical"));
-            }
+            return true;
+        }
+        else if (Input.GetKey(KeyCode.H))
+        {
+            transform.Translate(Vector3.forward * -15f * Time.fixedDeltaTime); //Avance sur x
+            
+            return true;
         }
         else
         {
-            activate = false;
+            return false;
         }
-
-        
+    }
+    public bool KeyRotation()
+    {
+        if (Input.GetKey(KeyCode.Y))
+        {
+            
+            transform.Rotate(Vector3.right * 90f * Time.fixedDeltaTime); //Tourne autour de y
+            //transform.Rotate(Vector3.right * 90f * Time.fixedDeltaTime * Input.GetAxis("Vertical"));
+            return true;
+        }
+        else if (Input.GetKey(KeyCode.G))
+        {
+            transform.Rotate(Vector3.right * -90f * Time.fixedDeltaTime);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        KeyRotation();
         KeyDeplacement();
     }
 }

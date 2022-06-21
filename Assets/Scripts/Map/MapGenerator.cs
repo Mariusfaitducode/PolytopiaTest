@@ -7,8 +7,8 @@ public class MapGenerator : MonoBehaviour
     
     public enum DrawMode {NoiseMap, ColourMap};
     public DrawMode drawMode;
-    public int mapWidth;
-    public int mapHeight;
+    public int mapWidth = Constants.MapWidth;
+    public int mapHeight = Constants.MapHeight;
     public float noiseScale;
 
     public int octaves;
@@ -22,6 +22,8 @@ public class MapGenerator : MonoBehaviour
     public CaseType.TerrainType[] regions;
 
     public PlateauJeu plateau;
+    
+    private System.Random ran = new System.Random();
 
     /*MapGenerator()
     {
@@ -66,6 +68,8 @@ public class MapGenerator : MonoBehaviour
 
     public void Generate3dMap()
     {
+        seed = ran.Next(0, 100);
+        
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
 
         InitTerrain terrain = FindObjectOfType<InitTerrain> ();

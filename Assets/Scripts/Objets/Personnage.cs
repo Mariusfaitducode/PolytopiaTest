@@ -8,13 +8,15 @@ public class Personnage : MonoBehaviour
     public PlateauJeu plateau;
     
     private string name;
+    
     //private enum type {Explorateur};
-    private float life;
-    private int mouvements; //portée du joueur
-    private int actions; //nbr d'actions du joueur
+    //private float life;
+    //private int mouvements; //portée du joueur
+    //private int actions; //nbr d'actions du joueur
+    
     private bool _isSelect;
 
-    public float vitesse = 10f;
+    public float vitesse = 15f;
 
     private float height;
 
@@ -22,7 +24,8 @@ public class Personnage : MonoBehaviour
 
     public Camera defaultCam;
     public Camera playerCam;
-
+    
+/*
     public Vector3 ReturnPlateauPos()
     {
         float tabX = transform.position.x + Constants.MapWidth * Constants.CaseSize / 2;
@@ -30,12 +33,12 @@ public class Personnage : MonoBehaviour
         Vector3 position = new Vector3( tabX, transform.position.y, tabY);
 
         return position;
-    }
-    public Vector3 ReturnCaseRef()
+    }*/
+    public Vector2 ReturnCaseRef()
     {
         int tabX = (int)((transform.position.x ) / Constants.CaseSize + Constants.MapWidth/2)  ;
         int tabY = (int)((transform.position.z )/ Constants.CaseSize + Constants.MapHeight/2);
-        Vector3 position = new Vector3( tabX, transform.position.y, tabY);
+        Vector2 position = new Vector3( tabX, tabY);
 
         return position;
     }
@@ -43,7 +46,7 @@ public class Personnage : MonoBehaviour
     public Case ReturnCase()
     {
         int i = (int)ReturnCaseRef().x;
-        int j = (int)ReturnCaseRef().z;
+        int j = (int)ReturnCaseRef().y;
         return plateau.grid[i, j];
     }
     private void OnMouseDown() //Choix de la caméra -> controle du personnage
@@ -64,7 +67,7 @@ public class Personnage : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         //mouv.mouvCam = playerCam.GetComponent<CameraMouvement>();
 
@@ -76,14 +79,14 @@ public class Personnage : MonoBehaviour
             if (mouv.KeyDeplacement(vitesse))
             {
                 Case actualCase = ReturnCase();
-                float newHeight = actualCase.caseCube.transform.position.y * 2 + 1;
+                float newHeight = actualCase.caseCube.transform.position.y * 2;
                 
-                print(height + " // " + newHeight);
+                //print(height + " // " + newHeight);
 
                 if (height + 4f >= newHeight)
                 {
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x,newHeight,gameObject.transform.position.z);
-                    print(actualCase.typeRegion.name);
+                    //print(actualCase.typeRegion.name);
                     height = newHeight;
                 }
                 else
@@ -91,10 +94,8 @@ public class Personnage : MonoBehaviour
                     gameObject.transform.position = lastPos;
                 }
             }
-            else
-            {
-                mouv.KeyRotation();
-            }
+            mouv.KeyRotation();
+            
         }
     }
 }

@@ -9,5 +9,5 @@ public class Constants
 
     public const int CaseSize = 10;
 
-    public const float altitude = 60f;
+    public const float altitude = 60f; //amplitude de l'altitude des blocks
 }

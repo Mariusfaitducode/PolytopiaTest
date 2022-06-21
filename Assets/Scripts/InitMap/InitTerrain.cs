@@ -44,7 +44,9 @@ public class InitTerrain : MonoBehaviour
 
                         obj.transform.parent = gameObject.transform;  //On place les cubes dans le bon dossier
                         
-                        plateau.grid[x, y] = new Case(regions[i], currentHeight, x, y, obj);
+                        plateau.grid[x, y] = new Case(regions[i], x, y, obj);  //Constructeur du cube, permet de créer le tableau
+                        
+                        
 
                         GenerateDecor(plateau.grid[x,y]);
                         
@@ -94,6 +96,8 @@ public class InitTerrain : MonoBehaviour
 
     public void SandWorld(Case newCase)
     {
+        //ChangeColor(newCase.caseCube);
+        
         GameObject[] newSand = default;
         int randNumber = ran.Next(1, 10);
             
@@ -111,6 +115,8 @@ public class InitTerrain : MonoBehaviour
     }
     public void LowLandWorld(Case newCase)
     {
+        //ChangeColor(newCase.caseCube);
+        
         GameObject newBuisson = default;
         GameObject newTree = default;
         int randNumber = ran.Next(1, 10);
@@ -133,7 +139,7 @@ public class InitTerrain : MonoBehaviour
             arbre += 1;
 
         }
-        ChangeColor(newTree);
+        ChangeColor2(newTree);
         ChangeScale(newTree,10);
         PlacementDecor(newTree, newCase);
         if (newTree != default && newBuisson != default)
@@ -148,6 +154,8 @@ public class InitTerrain : MonoBehaviour
     }
     public void MidLandWorld(Case newCase)
     {
+        //ChangeColor(newCase.caseCube);
+        
         GameObject newTree = default;
         int randNumber = ran.Next(1, 10);
         if (randNumber == 1)
@@ -160,12 +168,14 @@ public class InitTerrain : MonoBehaviour
             newTree = Instantiate(FindDecorWithName("pin").prefab);
             arbre += 1;
         }
-        ChangeColor(newTree);
+        ChangeColor2(newTree);
         ChangeScale(newTree,10);
         PlacementDecor(newTree, newCase);
     }
     public void HighLandWorld(Case newCase)
     {
+        //ChangeColor(newCase.caseCube);
+        
         GameObject newTree = default;
         GameObject newRoc = default;
         if (ran.Next(1, 4) == 1)
@@ -179,7 +189,7 @@ public class InitTerrain : MonoBehaviour
             newRoc = Instantiate(FindDecorWithName("pierre").prefab);
             pierre += 1;
         }
-        ChangeColor(newTree);
+        ChangeColor2(newTree);
         ChangeScale(newTree, 10);
         PlacementDecor(newTree, newCase);
         if (newTree != default && newRoc != default)
@@ -194,6 +204,8 @@ public class InitTerrain : MonoBehaviour
     }
     public void MountainWorld(Case newCase)
     {
+        //ChangeColor(newCase.caseCube);
+        
         GameObject[] newRoc = default;
         GameObject newTree = default;
         int randNumber = ran.Next(1, 10);
@@ -204,7 +216,7 @@ public class InitTerrain : MonoBehaviour
             ChangeScale(newTree, 10);
             PlacementDecor(newTree, newCase);
         }
-        else if (randNumber == 2)
+        else if (randNumber <= 3)
         {
             int length;
             int randNumber2 = ran.Next(1, 7);
@@ -235,6 +247,8 @@ public class InitTerrain : MonoBehaviour
     }
     public void HighMountainWorld(Case newCase)
     {
+        //ChangeColor(newCase.caseCube);
+        
         GameObject[] newRoc = default;
         int randNumber = ran.Next(1, 10);
             
@@ -251,7 +265,7 @@ public class InitTerrain : MonoBehaviour
     }
 
 
-    public void ChangeColor(GameObject decor) //Change le deuxième matériel soit les feuilles
+    public void ChangeColor2(GameObject decor) //Change le deuxième matériel soit les feuilles
     {
         if (decor != default)
         {
@@ -260,6 +274,16 @@ public class InitTerrain : MonoBehaviour
             decor.GetComponent<MeshRenderer>().materials[1].color += new Color(newColor.x,newColor.y,newColor.z,newColor.w);
         }
     }
+    public void ChangeColor(GameObject decor) 
+    {
+        if (decor != default)
+        {
+            Vector4 newColor = new Vector4((float)ran.NextDouble()/20, (float)ran.NextDouble()/20, 
+                (float)ran.NextDouble()/20, (float)ran.NextDouble()/10);
+            decor.GetComponent<MeshRenderer>().material.color += new Color(newColor.x,newColor.y,newColor.z,newColor.w);
+        }
+    }
+    
 
     public void ChangeScale(GameObject decor, int amplitude)
     {

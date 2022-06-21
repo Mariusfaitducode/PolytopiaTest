@@ -7,6 +7,8 @@ public class Item
    
     public string name;
     public int quantite = 0;
+
+    public GameObject itemOnScreen;
     
     
 
