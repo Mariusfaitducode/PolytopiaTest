@@ -34,7 +34,7 @@ public class CaseActions : MonoBehaviour
     {
         //print("CUUUT THIS TREE");
         //print(other);
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && !other.gameObject.CompareTag("CaseCube"))
         {
             //print("destroy");
 

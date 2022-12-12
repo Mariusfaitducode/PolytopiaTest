@@ -91,6 +91,10 @@ public class InitTerrain : MonoBehaviour
         {
             HighMountainWorld(newCase);
         }
+        else if (newCase.typeRegion.name.Equals("Snow"))
+        {
+           SnowWorld(newCase);
+        }
         
     }
 
@@ -98,10 +102,10 @@ public class InitTerrain : MonoBehaviour
     {
         //ChangeColor(newCase.caseCube);
         
-        GameObject[] newSand = default;
+        GameObject[] newSand;
         int randNumber = ran.Next(1, 10);
             
-        if (randNumber < 3)
+        if (randNumber < 7)
         {
             newSand = new GameObject[ran.Next(1, 4)];
             for (int i = 0; i < newSand.Length; i++)
@@ -122,9 +126,10 @@ public class InitTerrain : MonoBehaviour
         int randNumber = ran.Next(1, 10);
         if (randNumber < 7)
         {
-            newBuisson = Instantiate(FindDecorWithName("buisson").prefab);
+            newBuisson = Instantiate(FindDecorWithName("buisson_plaines").prefab);
             
-            ChangeScale(newBuisson, 10);
+            ChangeScale(newBuisson, 100);
+            ChangeColor(newBuisson);
             buisson += 1;
         }
         if (randNumber == 1) //Arbre pin
@@ -139,7 +144,7 @@ public class InitTerrain : MonoBehaviour
             arbre += 1;
 
         }
-        ChangeColor2(newTree);
+        ChangeColor2(newTree, 1);
         ChangeScale(newTree,10);
         PlacementDecor(newTree, newCase);
         if (newTree != default && newBuisson != default)
@@ -157,20 +162,31 @@ public class InitTerrain : MonoBehaviour
         //ChangeColor(newCase.caseCube);
         
         GameObject newTree = default;
+        GameObject newBuisson = default;
         int randNumber = ran.Next(1, 10);
-        if (randNumber == 1)
+        if (randNumber < 7)
+        {
+            newBuisson = Instantiate(FindDecorWithName("buisson_plaines").prefab);
+            buisson += 1;
+        }
+        if (randNumber <= 4 )
         {
             newTree = Instantiate(FindDecorWithName("arbre").prefab);
             arbre += 1;
         }
-        else if (randNumber == 2 || randNumber == 3)
+        else if (randNumber <= 6)
         {
             newTree = Instantiate(FindDecorWithName("pin").prefab);
             arbre += 1;
         }
-        ChangeColor2(newTree);
-        ChangeScale(newTree,10);
+        
+        ChangeScale(newBuisson, 100);
+        ChangeColor2(newBuisson, 0);
+        PlacementDecor(newBuisson, newCase);
+        ChangeColor2(newTree, 1);
+        ChangeScale(newTree,15);
         PlacementDecor(newTree, newCase);
+        
     }
     public void HighLandWorld(Case newCase)
     {
@@ -182,6 +198,13 @@ public class InitTerrain : MonoBehaviour
         {
             newTree = Instantiate(FindDecorWithName("sapin").prefab);
             arbre += 1;
+            ChangeColor2(newTree, 1);
+        }
+        else if (ran.Next(10) < 4)
+        {
+            newTree = Instantiate(FindDecorWithName("pin").prefab);
+            arbre += 1;
+            ChangeColor3(newTree, 1);
         }
 
         if (ran.Next(1, 8) == 1)
@@ -189,8 +212,9 @@ public class InitTerrain : MonoBehaviour
             newRoc = Instantiate(FindDecorWithName("pierre").prefab);
             pierre += 1;
         }
-        ChangeColor2(newTree);
-        ChangeScale(newTree, 10);
+
+        
+        ChangeScale(newTree, 5);
         PlacementDecor(newTree, newCase);
         if (newTree != default && newRoc != default)
         {
@@ -209,20 +233,28 @@ public class InitTerrain : MonoBehaviour
         GameObject[] newRoc = default;
         GameObject newTree = default;
         int randNumber = ran.Next(1, 10);
-        if (randNumber == 1)
+        if (ran.Next(1, 3) == 1)
+        {
+            newTree = Instantiate(FindDecorWithName("sapin").prefab);
+            arbre += 1;
+            ChangeScale(newTree, 25);
+            ChangeColor3(newTree, 1);
+            PlacementDecor(newTree, newCase);
+        }
+        else if (randNumber < 2)
         {
             newTree = Instantiate(FindDecorWithName("tronc").prefab);
             arbre += 1;
             ChangeScale(newTree, 10);
             PlacementDecor(newTree, newCase);
         }
-        else if (randNumber <= 3)
+        else if (randNumber <= 4)
         {
             int length;
             int randNumber2 = ran.Next(1, 7);
             if (randNumber2 < 4)
             {
-                length = 1;
+                length = 3;
             }
             else if (randNumber2 < 6)
             {
@@ -230,7 +262,7 @@ public class InitTerrain : MonoBehaviour
             }
             else
             {
-                length = 3;
+                length = 1;
             }
                 
             newRoc = new GameObject[length];
@@ -239,7 +271,7 @@ public class InitTerrain : MonoBehaviour
                 newRoc[i] = Instantiate(FindDecorWithName("pierre").prefab);
                 pierre += 1;
                 
-                ChangeScale(newRoc[i], 10);
+                ChangeScale(newRoc[i], 20);
                 PlacementDecor(newRoc[i], newCase);
             }
                 
@@ -250,36 +282,90 @@ public class InitTerrain : MonoBehaviour
         //ChangeColor(newCase.caseCube);
         
         GameObject[] newRoc = default;
+        GameObject newTree = default;
         int randNumber = ran.Next(1, 10);
+        
+        if (ran.Next(1, 4) == 1)
+        {
+            newTree = Instantiate(FindDecorWithName("sapin").prefab);
+            arbre += 1;
+            ChangeScale(newTree, 25);
+            ChangeColor3(newTree,1);
+            PlacementDecor(newTree, newCase);
+        }
+        else if (randNumber <= 3)
+        {
+            newTree = Instantiate(FindDecorWithName("tronc").prefab);
+            arbre += 1;
+            ChangeScale(newTree, 10);
+            PlacementDecor(newTree, newCase);
+        }
             
-        if (randNumber < 3)
+        if (randNumber <= 6)
         {
             newRoc = new GameObject[ran.Next(1, 4)];
             for (int i = 0; i < newRoc.Length; i++)
             {
                 newRoc[i] = Instantiate(FindDecorWithName("pierre").prefab);
                 pierre += 1;
+                ChangeScale(newRoc[i], 50);
+                PlacementDecor(newRoc[i], newCase);
+            }
+        }
+    }
+
+    public void SnowWorld(Case newCase)
+    {
+        GameObject[] newRoc = default;
+        GameObject newTree = default;
+        int randNumber = ran.Next(1, 10);
+        
+        if (randNumber <= 3)
+        {
+            newTree = Instantiate(FindDecorWithName("tronc").prefab);
+            arbre += 1;
+            ChangeScale(newTree, 10);
+            PlacementDecor(newTree, newCase);
+        }
+            
+        if (randNumber <= 4)
+        {
+            newRoc = new GameObject[ran.Next(1, 4)];
+            for (int i = 0; i < newRoc.Length; i++)
+            {
+                newRoc[i] = Instantiate(FindDecorWithName("pierre").prefab);
+                pierre += 1;
+                ChangeScale(newRoc[i], 10);
                 PlacementDecor(newRoc[i], newCase);
             }
         }
     }
 
 
-    public void ChangeColor2(GameObject decor) //Change le deuxième matériel soit les feuilles
+    public void ChangeColor2(GameObject decor, int indexMat) //Change le deuxième matériel soit les feuilles
     {
         if (decor != default)
         {
-            Vector4 newColor = new Vector4((float)ran.NextDouble()/8, (float)ran.NextDouble()/5, 
-                (float)ran.NextDouble()/100, (float)ran.NextDouble()/10);
-            decor.GetComponent<MeshRenderer>().materials[1].color += new Color(newColor.x,newColor.y,newColor.z,newColor.w);
+            Vector4 newColor = new Vector4((float)-ran.NextDouble()/10, (float)ran.NextDouble()/20, 
+                (float)ran.NextDouble()/10, (float)ran.NextDouble()/4);
+            decor.GetComponent<MeshRenderer>().materials[indexMat].color -= new Color(newColor.x,newColor.y,newColor.z,newColor.w);
+        }
+    }
+    public void ChangeColor3(GameObject decor, int indexMat) //Change le deuxième matériel soit les feuilles
+    {
+        if (decor != default)
+        {
+            Vector4 newColor = new Vector4(-(float)ran.NextDouble()/20, (float)ran.NextDouble()/5, 
+                (float)ran.NextDouble()/5, (float)ran.NextDouble()/4);
+            decor.GetComponent<MeshRenderer>().materials[indexMat].color -= new Color(newColor.x,newColor.y,newColor.z,newColor.w);
         }
     }
     public void ChangeColor(GameObject decor) 
     {
         if (decor != default)
         {
-            Vector4 newColor = new Vector4((float)ran.NextDouble()/20, (float)ran.NextDouble()/20, 
-                (float)ran.NextDouble()/20, (float)ran.NextDouble()/10);
+            Vector4 newColor = new Vector4((float)ran.NextDouble()/5, (float)ran.NextDouble()/2, 
+                (float)ran.NextDouble()/20, (float)ran.NextDouble()/5);
             decor.GetComponent<MeshRenderer>().material.color += new Color(newColor.x,newColor.y,newColor.z,newColor.w);
         }
     }
@@ -289,7 +375,7 @@ public class InitTerrain : MonoBehaviour
     {
         if (decor != default)
         {
-            int changeScale = ran.Next(-amplitude, amplitude);
+            int changeScale = ran.Next(0, 2 * amplitude);
             decor.transform.localScale += new Vector3(changeScale, changeScale, changeScale);
         }
     }
