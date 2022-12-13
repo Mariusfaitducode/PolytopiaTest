@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Deplacements : MonoBehaviour
 {
-    public CameraMouvement mouvCam;
     public bool KeyDeplacement(float vitesse)
     {
         if (!Input.GetKey(KeyCode.RightShift) && Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)

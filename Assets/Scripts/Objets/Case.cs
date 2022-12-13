@@ -34,7 +34,8 @@ public class Case
 
         if (typeRegion.name.Equals("Water"))
         {
-            surfaceHeight = 0.4f * Constants.altitude;
+            //surfaceHeight = 0.4f * Constants.altitude;
+            surfaceHeight = region.height * altitude ;
         }
         else
         {
