@@ -68,7 +68,7 @@ public class MapGenerator : MonoBehaviour
 
     public void Generate3dMap()
     {
-        seed = ran.Next(0, 100);
+        //seed = ran.Next(0, 100);
         
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
 

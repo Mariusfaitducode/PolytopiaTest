@@ -4,19 +4,63 @@ using UnityEngine;
 
 public class Deplacements : MonoBehaviour
 {
+    private float height;
+
     public bool KeyDeplacement(float vitesse)
     {
         if (!Input.GetKey(KeyCode.RightShift) && Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
-            transform.Translate(Vector3.forward * vitesse * Time.fixedDeltaTime * Input.GetAxis("Vertical")); //Avance sur z
-            transform.Translate(Vector3.right * vitesse * Time.fixedDeltaTime * Input.GetAxis("Horizontal")); //Avance sur x
+            Vector3 lastPos = transform.position;
+            
+            transform.Translate(Vector3.forward * vitesse * Time.fixedDeltaTime *
+                                Input.GetAxis("Vertical")); //Avance sur z
+            
+            transform.Translate(Vector3.right * vitesse * Time.fixedDeltaTime *
+                                Input.GetAxis("Horizontal")); //Avance sur x
+
+            height = transform.position.y;
+            
+
+            Case actualCase = GetComponent<Personnage>().ReturnCase();
+            print(actualCase);
+            float newHeight = actualCase.caseCube.transform.position.y * 2;
+
+            //print(height + " // " + newHeight);
+
+            if (height + 4f >= newHeight)
+            {
+                //print("ok");
+                gameObject.transform.position = new Vector3(gameObject.transform.position.x, newHeight,
+                    gameObject.transform.position.z);
+                //print(actualCase.typeRegion.name);
+                height = newHeight;
+            }
+            else
+            {
+                //print("ko");
+                gameObject.transform.position = lastPos;
+            }
+
             return true;
         }
-        else
+
+        return false;
+    }
+
+    public void KeyDeplacement2(float vitesse)
+    {
+        if (!Input.GetKey(KeyCode.RightShift) && Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
-            return false;
+            
+
+            transform.Translate(Vector3.forward * vitesse * Time.fixedDeltaTime *
+                                Input.GetAxis("Vertical")); //Avance sur z
+
+            transform.Translate(Vector3.right * vitesse * Time.fixedDeltaTime *
+                                Input.GetAxis("Horizontal")); //Avance sur x
         }
     }
+
 
     public bool KeyRotation()
     {

@@ -6,10 +6,10 @@ TagManager:
   tags:
   - CaseCube
   - bois
+  - buisson
   - pierre
   - sable
-  - Water
-  - buisson
+  - Sortie
   layers:
   - Default
   - TransparentFX

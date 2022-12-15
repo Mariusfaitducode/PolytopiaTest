@@ -24,6 +24,8 @@ public class Personnage : MonoBehaviour
 
     public Camera defaultCam;
     public Camera playerCam;
+
+    public bool exit;
     
 /*
     public Vector3 ReturnPlateauPos()
@@ -73,26 +75,9 @@ public class Personnage : MonoBehaviour
 
         if ( _isSelect )
         {
-            height = transform.position.y;
-            Vector3 lastPos = transform.position;
-            
-            if (mouv.KeyDeplacement(vitesse))
+            if (!exit)
             {
-                Case actualCase = ReturnCase();
-                float newHeight = actualCase.caseCube.transform.position.y * 2;
-                
-                //print(height + " // " + newHeight);
-
-                if (height + 4f >= newHeight)
-                {
-                    gameObject.transform.position = new Vector3(gameObject.transform.position.x,newHeight,gameObject.transform.position.z);
-                    //print(actualCase.typeRegion.name);
-                    height = newHeight;
-                }
-                else
-                {
-                    gameObject.transform.position = lastPos;
-                }
+                mouv.KeyDeplacement(vitesse);
             }
             mouv.KeyRotation();
             

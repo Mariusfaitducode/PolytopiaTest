@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.SceneTemplate;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class Case
@@ -20,7 +22,7 @@ public class Case
     
     //private GameObject personnage;
 
-    public Case( CaseType.TerrainType region, int x, int y, GameObject obj)
+    public Case( CaseType.TerrainType region, int x, int y, GameObject obj, bool sortie)
     {
         typeRegion = region;
         
@@ -51,8 +53,20 @@ public class Case
         caseCube.transform.position = position;
 
         caseCube.transform.localScale = new Vector3(Constants.CaseSize, surfaceHeight, Constants.CaseSize);
+
+        if (!sortie)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = region.colour;
+        }
+        else
+        {
+            obj.GetComponent<MeshRenderer>().material.color = Color.yellow;
+            obj.tag = String.Copy("Sortie");
+            
+            obj.GetComponent<BoxCollider>().isTrigger = true;
+            obj.GetComponent<SortieCube>().enabled = true;
+        }
         
-        obj.GetComponent<MeshRenderer>().material.color = region.colour;
 
         obj.GetComponent<BlockCase>().tabRef = tabRef;
     }

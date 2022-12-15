@@ -62,13 +62,11 @@ namespace com.zibra.liquid.Manipulators
         // Used velocity will be equal to GetRotatedInitialVelocity
         public Vector3 InitialVelocity = new Vector3(0, 0, 0);
 
-        [NonSerialized]
-        [Obsolete("PositionClampBehavior is deprecated. Clamp position of emitter manually if you need to.", true)]
-        public ClampBehaviorType PositionClampBehavior;
-
         [HideInInspector]
         [SerializeField]
         private int ObjectVersion = 1;
+
+
 
 #if UNITY_EDITOR
         void OnSceneOpened(Scene scene, UnityEditor.SceneManagement.OpenSceneMode mode)

@@ -31,7 +31,8 @@ public class InitTerrain : MonoBehaviour
     
     public void GenerateTerrain(float [,] heightMap, CaseType.TerrainType[] regions)
     {
-
+        int rand = Random.Range(0, Constants.MapWidth * Constants.MapHeight);
+        print(rand);
         for ( int y = 0; y < Constants.MapWidth; y++){
             for ( int x = 0; x < Constants.MapHeight; x++){
                 
@@ -41,19 +42,24 @@ public class InitTerrain : MonoBehaviour
                     if (currentHeight <= regions[i].height)
                     {
                         GameObject obj = Instantiate(caseCube);
-
-                        obj.transform.parent = gameObject.transform;  //On place les cubes dans le bon dossier
                         
-                        plateau.grid[x, y] = new Case(regions[i], x, y, obj);  //Constructeur du cube, permet de créer le tableau
-                        
-                        
-
+                        if (rand == 0)
+                        {
+                            plateau.grid[x, y] = new Case(regions[i], x, y, obj, true);  //Constructeur du cube, permet de créer le tableau
+                        }
+                        else
+                        {
+                            plateau.grid[x, y] = new Case(regions[i], x, y, obj, false);  //Constructeur du cube, permet de créer le tableau
+                        }
                         GenerateDecor(plateau.grid[x,y]);
-                        
+                        //On place les cubes dans le bon dossier
+                        obj.transform.parent = gameObject.transform; 
                         
                         break;
                     }
                 }
+                
+                rand--;
             }
         }
 

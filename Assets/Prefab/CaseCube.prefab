@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &554838936471415525
 Transform:
   m_ObjectHideFlags: 0
@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chosenSDFType: 1
-  InvertSDF: 0
-  SurfaceDistance: 0
+  InvertSDF: 1
+  SurfaceDistance: 10
 --- !u!1 &5278183251501193274
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,6 +60,7 @@ GameObject:
   - component: {fileID: 3717367606099886451}
   - component: {fileID: 2882576121651164935}
   - component: {fileID: 4768311232529465247}
+  - component: {fileID: 392696278607859648}
   m_Layer: 0
   m_Name: CaseCube
   m_TagString: CaseCube
@@ -159,3 +160,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tabRef: {x: 0, y: 0}
+--- !u!114 &392696278607859648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5278183251501193274}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f7b190ef18df6640b841b4fe939ddff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 2860968022572633007, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
