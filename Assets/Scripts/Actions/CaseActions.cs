@@ -38,24 +38,10 @@ public class CaseActions : MonoBehaviour
         {
             //print("destroy");
 
-            Item item = invent.FindWithName(other.gameObject.tag);
+            Inventaire.Item item = invent.FindWithName(other.gameObject.tag);
+            print(item.name);
 
-            if ( item != default) //Actualiser le nombre d'objets
-            {
-                item.IncrementQuantite();
-                item.itemOnScreen.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name + "\n"+ item.quantite);
-            }
-            else    //Nouvel objet dans l'inventaire
-            {
-                invent.collection.Add(new Item(other.gameObject.tag));
-                item = invent.FindWithName(other.gameObject.tag);
-                
-                item.itemOnScreen = Instantiate(invent.itemDispPF);
-                item.itemOnScreen.transform.parent = canvas.transform;
-                item.itemOnScreen.transform.position = new Vector3(invent.collection.Count * 200,100,0);
-                
-                item.itemOnScreen.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name + "\n"+ item.quantite);
-            }
+            invent.IncrementQuantite(item);
             
             invent.DispList();
             
@@ -76,3 +62,20 @@ public class CaseActions : MonoBehaviour
         //Construire
     }
 }
+
+/*if ( item != default) //Actualiser le nombre d'objets
+            {
+                invent.IncrementQuantite(item);
+                //item.itemOnScreen.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name + "\n"+ item.quantite);
+            }
+            else    //Nouvel objet dans l'inventaire
+            {
+                invent.collection.Add(new Item(other.gameObject.tag));
+                item = invent.FindWithName(other.gameObject.tag);
+                
+                item.itemOnScreen = Instantiate(invent.itemDispPF);
+                item.itemOnScreen.transform.parent = canvas.transform;
+                item.itemOnScreen.transform.position = new Vector3(invent.collection.Count * 200,100,0);
+                
+                item.itemOnScreen.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name + "\n"+ item.quantite);
+            }*/
