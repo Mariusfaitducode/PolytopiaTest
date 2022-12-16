@@ -1103,7 +1103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &683247714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1153,8 +1153,8 @@ Canvas:
   m_GameObject: {fileID: 683247713}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
-  m_Camera: {fileID: 394050784}
+  m_RenderMode: 0
+  m_Camera: {fileID: 4905058}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1178,8 +1178,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 946103087}
-  m_Father: {fileID: 1216330072}
-  m_RootOrder: 0
+  m_Father: {fileID: 141857575}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1342,7 +1342,7 @@ GameObject:
   - component: {fileID: 937528433}
   - component: {fileID: 937528432}
   m_Layer: 0
-  m_Name: MenuStart
+  m_Name: MenuStartCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2355,7 +2355,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8824656693036545596, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: level
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8824656693036545596, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: plateau
@@ -2395,7 +2395,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2860968022572633007, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2860968022572633007, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: m_TagString
@@ -2498,8 +2498,7 @@ Transform:
   m_LocalPosition: {x: 16.403015, y: 23.710968, z: -19.837158}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 683247717}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3915,6 +3914,7 @@ GameObject:
   - component: {fileID: 2145554160}
   - component: {fileID: 2145554159}
   - component: {fileID: 2145554158}
+  - component: {fileID: 2145554161}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -4013,7 +4013,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2145554158}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2145554161}
+        m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
+        m_MethodName: NextWorld
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &2145554160
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4022,3 +4034,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2145554156}
   m_CullTransparentMesh: 1
+--- !u!114 &2145554161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145554156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6882b8c472bc0084aa550c114aca5425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeStart: {fileID: 607914263}
+  newPlane: {fileID: 1100503031}
+  canvasMenu: {fileID: 937528434}
+  explorateur: {fileID: 141857567}
