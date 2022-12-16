@@ -30,7 +30,7 @@ public class Personnage : MonoBehaviour
 
     public bool exit;
 
-    public int level = 0;
+    public int level;
     
 /*
     public Vector3 ReturnPlateauPos()
@@ -99,7 +99,15 @@ public class Personnage : MonoBehaviour
         {
             int size = 0;
 
-            
+            if (level == 0)
+            {
+                size = Constants.MapSize_1;
+            }
+            else if (level == 1)
+            {
+                size = Constants.MapSize_2;
+            }
+
             height = transform.position.y;
 
 
@@ -107,9 +115,10 @@ public class Personnage : MonoBehaviour
             {
                 transform.position = new Vector3(0, 60, 0);
                 exit = false;
+                level += 1;
             }
             
-            float newHeight = ReturnCase(Constants.MapSize_1).caseCube.transform.position.y * 2;
+            float newHeight = ReturnCase(size).caseCube.transform.position.y * 2;
             
             //transform.position.y = newHeight;
             

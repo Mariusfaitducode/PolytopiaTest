@@ -59,7 +59,7 @@ public class Case
             surfaceHeight = region.height * altitude;
         }
 
-        int size = Constants.MapSize_1;
+        float size = Constants.MapSize_1;
 
         position = new Vector3();
         position.x = (tabRef.x * Constants.CaseSize) - size * Constants.CaseSize / 2 + Constants.CaseSize / 2;
@@ -110,7 +110,7 @@ public class Case
             surfaceHeight = region.height * altitude;
         }
 
-        int size = Constants.MapSize_2;
+        float size = Constants.MapSize_2;
 
         position = new Vector3();
         position.x = (tabRef.x * Constants.CaseSize) - size * Constants.CaseSize / 2 + Constants.CaseSize / 2;

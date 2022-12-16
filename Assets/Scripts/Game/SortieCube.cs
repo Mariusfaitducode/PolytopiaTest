@@ -21,22 +21,22 @@ public class SortieCube : MonoBehaviour
             Item item2 = invent.FindWithName("bois");
             Item item3 = invent.FindWithName("sable");
 
-            /*if (item.quantite > 20 && item2.quantite > 20
+            if (item.quantite > 20 && item2.quantite > 20
                                    && item3.quantite > 20)
             {
-                print("ouvert");
+                print("Level 0 complete");
                 player = other.gameObject;
                 player.GetComponent<Personnage>().exit = true;
                 success = true;
 
-            }*/
+            }/*
             if (!success)
             {
                 print("Level 0 complete");
                 player = other.gameObject;
                 player.GetComponent<Personnage>().exit = true;
                 success = true;
-            }
+            }*/
             
         }
     }

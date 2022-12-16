@@ -69,7 +69,7 @@ public class InitTerrain : MonoBehaviour
                         }
                         else
                         {
-                            print("x="+x+"   y="+y);
+                            //print("x="+x+"   y="+y);
                             plateau.grid[x, y] = new Case(regions[i], x, y, obj, false, level);  //Constructeur du cube, permet de créer le tableau
                         }
                         //print("level = "+level);
