@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - CaseCube
+  - bois
+  - buisson
+  - pierre
+  - sable
+  - Sortie
   layers:
   - Default
   - TransparentFX
@@ -26,7 +31,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - Animal
   - 
   - 
   - 

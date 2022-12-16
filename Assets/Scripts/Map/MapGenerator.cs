@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,8 +8,8 @@ public class MapGenerator : MonoBehaviour
     
     public enum DrawMode {NoiseMap, ColourMap};
     public DrawMode drawMode;
-    public int mapWidth;
-    public int mapHeight;
+    public int mapWidth = Constants.MapSize_1;
+    public int mapHeight = Constants.MapSize_1;
     public float noiseScale;
 
     public int octaves;
@@ -22,6 +23,13 @@ public class MapGenerator : MonoBehaviour
     public CaseType.TerrainType[] regions;
 
     public PlateauJeu plateau;
+    
+    private System.Random ran = new System.Random();
+
+    public InitTerrain terrain;
+    
+
+    public int level;
 
     /*MapGenerator()
     {
@@ -35,8 +43,31 @@ public class MapGenerator : MonoBehaviour
         seed = 32;
         offset = new Vector2(-0.43f, 2.8f);
         regions = CaseType.DefaultTerrain();
+        
+        public void Start()
+    {
+        terrain = FindObjectOfType<InitTerrain> ();
+    }
     }*/
+    public void Start()
+    {
+        
+
+        if (level == 0)
+        {
+            mapWidth = Constants.MapSize_1;
+            mapHeight = Constants.MapSize_1;
+        }
+        else if (level == 1)
+        {
+            mapWidth = Constants.MapSize_2;
+            mapHeight = Constants.MapSize_2;
+        }
+    }
+
+
     public void GenerateMap(){
+        
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
         
         Color[] colourMap = new Color[mapWidth * mapHeight];
@@ -64,12 +95,19 @@ public class MapGenerator : MonoBehaviour
         }*/
     }
 
-    public void Generate3dMap()
+    public void Generate3dMap(bool rand, int level)
     {
-        float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
+        if (rand)
+        {
+            seed = ran.Next(0, 100);
+        }
 
-        InitTerrain terrain = FindObjectOfType<InitTerrain> ();
-        terrain.GenerateTerrain(noiseMap, regions);
+        float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
+        
+        print("length noise");
+        print(noiseMap.Length);
+        terrain.GenerateTerrain(noiseMap, regions, level);
+        
     }
     void OnValidate(){
         if (mapWidth < 1){
