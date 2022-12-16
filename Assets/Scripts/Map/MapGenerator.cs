@@ -51,18 +51,10 @@ public class MapGenerator : MonoBehaviour
     }*/
     public void Start()
     {
-        
+        int size = Constants.GetConstant(level);
 
-        if (level == 0)
-        {
-            mapWidth = Constants.MapSize_1;
-            mapHeight = Constants.MapSize_1;
-        }
-        else if (level == 1)
-        {
-            mapWidth = Constants.MapSize_2;
-            mapHeight = Constants.MapSize_2;
-        }
+        mapWidth = size;
+        mapHeight = size;
     }
 
 

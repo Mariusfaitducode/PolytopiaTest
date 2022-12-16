@@ -40,17 +40,7 @@ public class InitTerrain : MonoBehaviour
         //print(rand);
         print("level = " + level);
         
-        int size = 0;
-        
-        if (level == 0)
-        {
-            size = Constants.MapSize_1;
-        }
-
-        if (level == 1)
-        {
-            size = Constants.MapSize_2;
-        }
+        int size = Constants.GetConstant(level);
         
         
         for ( int y = 0; y < size; y++){

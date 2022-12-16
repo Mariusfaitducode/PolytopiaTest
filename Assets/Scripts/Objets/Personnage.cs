@@ -97,16 +97,7 @@ public class Personnage : MonoBehaviour
 
         if (_isSelect)
         {
-            int size = 0;
-
-            if (level == 0)
-            {
-                size = Constants.MapSize_1;
-            }
-            else if (level == 1)
-            {
-                size = Constants.MapSize_2;
-            }
+            int size = Constants.GetConstant(level);
 
             height = transform.position.y;
 
