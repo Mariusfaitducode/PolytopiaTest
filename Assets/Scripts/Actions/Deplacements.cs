@@ -6,7 +6,7 @@ public class Deplacements : MonoBehaviour
 {
     private float height;
 
-    public bool KeyDeplacement(float vitesse)
+    public bool KeyDeplacement(float vitesse, Case actualCase)
     {
         if (!Input.GetKey(KeyCode.RightShift) && Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
@@ -19,10 +19,7 @@ public class Deplacements : MonoBehaviour
                                 Input.GetAxis("Horizontal")); //Avance sur x
 
             height = transform.position.y;
-            
 
-            Case actualCase = GetComponent<Personnage>().ReturnCase();
-            print(actualCase);
             float newHeight = actualCase.caseCube.transform.position.y * 2;
 
             //print(height + " // " + newHeight);

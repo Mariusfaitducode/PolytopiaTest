@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,9 @@ public class MapGenerator : MonoBehaviour
     
     private System.Random ran = new System.Random();
 
+    public InitTerrain terrain_1;
+    public InitTerrain terrain_2;
+
     /*MapGenerator()
     {
         drawMode = DrawMode.ColourMap;
@@ -37,7 +41,15 @@ public class MapGenerator : MonoBehaviour
         seed = 32;
         offset = new Vector2(-0.43f, 2.8f);
         regions = CaseType.DefaultTerrain();
+        
+        public void Start()
+    {
+        terrain = FindObjectOfType<InitTerrain> ();
+    }
     }*/
+
+    
+
     public void GenerateMap(){
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
         
@@ -66,14 +78,24 @@ public class MapGenerator : MonoBehaviour
         }*/
     }
 
-    public void Generate3dMap()
+    public void Generate3dMap(bool rand, int level)
     {
-        //seed = ran.Next(0, 100);
-        
+        if (rand)
+        {
+            seed = ran.Next(0, 100);
+        }
+
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
 
-        InitTerrain terrain = FindObjectOfType<InitTerrain> ();
-        terrain.GenerateTerrain(noiseMap, regions);
+        if (level == 0)
+        {
+            terrain_1.GenerateTerrain(noiseMap, regions, level);
+        }
+        else if (level == 1)
+        {
+            terrain_2.GenerateTerrain(noiseMap, regions, level);
+        }
+        
     }
     void OnValidate(){
         if (mapWidth < 1){

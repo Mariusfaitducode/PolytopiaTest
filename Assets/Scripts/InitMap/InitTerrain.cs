@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InitTerrain : MonoBehaviour
 {
     public GameObject caseCube;
     public PlateauJeu plateau;
+    //public int level = 0;
 
     public CaseType.DecorType[] decorList;
 
@@ -15,6 +18,8 @@ public class InitTerrain : MonoBehaviour
     private int buisson = 0;
     private int pierre = 0;
     private int sable = 0;
+
+    
 
     public CaseType.DecorType FindDecorWithName(string name)
     {
@@ -29,12 +34,27 @@ public class InitTerrain : MonoBehaviour
         return default;
     }
     
-    public void GenerateTerrain(float [,] heightMap, CaseType.TerrainType[] regions)
+    public void GenerateTerrain(float [,] heightMap, CaseType.TerrainType[] regions, int level)
     {
         int rand = Random.Range(0, Constants.MapWidth * Constants.MapHeight);
-        print(rand);
-        for ( int y = 0; y < Constants.MapWidth; y++){
-            for ( int x = 0; x < Constants.MapHeight; x++){
+        //print(rand);
+        print("level = " + level);
+        
+        int size = 0;
+        
+        if (level == 0)
+        {
+            size = Constants.MapWidth;
+        }
+
+        if (level == 1)
+        {
+            size = Constants.Map_2;
+        }
+        
+        
+        for ( int y = 0; y < size; y++){
+            for ( int x = 0; x < size; x++){
                 
                 float currentHeight = heightMap [x, y];
 
@@ -43,15 +63,22 @@ public class InitTerrain : MonoBehaviour
                     {
                         GameObject obj = Instantiate(caseCube);
                         
-                        if (rand == 0)
+                        if (rand == 0)//cube de sortie
                         {
-                            plateau.grid[x, y] = new Case(regions[i], x, y, obj, true);  //Constructeur du cube, permet de créer le tableau
+                            plateau.grid[x, y] = new Case(regions[i], x, y, obj, true, level);  //Constructeur du cube, permet de créer le tableau
                         }
                         else
                         {
-                            plateau.grid[x, y] = new Case(regions[i], x, y, obj, false);  //Constructeur du cube, permet de créer le tableau
+                            plateau.grid[x, y] = new Case(regions[i], x, y, obj, false, level);  //Constructeur du cube, permet de créer le tableau
                         }
-                        GenerateDecor(plateau.grid[x,y]);
+                        //print("level = "+level);
+                        if (level == 0)
+                        {
+                            GenerateDecor(plateau.grid[x,y]);
+                            
+                        }
+
+
                         //On place les cubes dans le bon dossier
                         obj.transform.parent = gameObject.transform; 
                         
@@ -62,7 +89,8 @@ public class InitTerrain : MonoBehaviour
                 rand--;
             }
         }
-
+        print(level);
+        level += 1;
         print("arbre =" + arbre + "\npierre =" + pierre + "\nsable = " + sable + "\nbuisson = " + buisson);
     }
     
@@ -413,7 +441,7 @@ public class InitTerrain : MonoBehaviour
         
         while (magnitude < 2)
         {
-            print("calcul");  // moins de 500 itérations pour 2500 cases
+            //print("calcul");  // moins de 500 itérations pour 2500 cases
             posX = newCase.caseCube.transform.position.x + ran.Next(-3, 3);
             posZ = newCase.caseCube.transform.position.z + ran.Next(-3, 3);
             

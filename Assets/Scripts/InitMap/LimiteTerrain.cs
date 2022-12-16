@@ -33,8 +33,8 @@ public class LimiteTerrain : MonoBehaviour
 
         //int i = (int)personnage.ReturnCaseRef().x;
 
-        int x = (int) personnage.ReturnCaseRef().x;
-        int y = (int) personnage.ReturnCaseRef().y;
+        int x = (int) personnage.ReturnCaseRef(0).x;
+        int y = (int) personnage.ReturnCaseRef(0).y;
         
         int l_Xmax = x + distance;
         int l_Xmin = x - distance;
@@ -105,8 +105,8 @@ public class LimiteTerrain : MonoBehaviour
             LimiteBlock block = listCube[a];
             Vector2 ecart;
 
-            ecart.x = block.cube.transform.position.x - personnage.ReturnCase().caseCube.transform.position.x;
-            ecart.y = block.cube.transform.position.z - personnage.ReturnCase().caseCube.transform.position.z;
+            ecart.x = block.cube.transform.position.x - personnage.ReturnCase(0).caseCube.transform.position.x;
+            ecart.y = block.cube.transform.position.z - personnage.ReturnCase(0).caseCube.transform.position.z;
             
             //print(ecart.magnitude);
             int refX = (int)block.tabRef.x;
@@ -130,10 +130,10 @@ public class LimiteTerrain : MonoBehaviour
                     for (int j = refY-1; j < refY + 2; j++)
                     {
                         ecart.x = plateau.grid[i, j].caseCube.transform.position.x -
-                                  personnage.ReturnCase().caseCube.transform.position.x;
+                                  personnage.ReturnCase(0).caseCube.transform.position.x;
                         
                         ecart.y = plateau.grid[i, j].caseCube.transform.position.z -
-                                  personnage.ReturnCase().caseCube.transform.position.y;
+                                  personnage.ReturnCase(0).caseCube.transform.position.y;
                         
                         print(i + "//"+j);
 

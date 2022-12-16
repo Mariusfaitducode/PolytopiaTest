@@ -26,6 +26,8 @@ public class Personnage : MonoBehaviour
     public Camera playerCam;
 
     public bool exit;
+
+    public int level = 0;
     
 /*
     public Vector3 ReturnPlateauPos()
@@ -36,19 +38,25 @@ public class Personnage : MonoBehaviour
 
         return position;
     }*/
-    public Vector2 ReturnCaseRef()
+
+    public void Start()
     {
-        int tabX = (int)((transform.position.x ) / Constants.CaseSize + Constants.MapWidth/2)  ;
-        int tabY = (int)((transform.position.z )/ Constants.CaseSize + Constants.MapHeight/2);
+        transform.position = new Vector3(0, 60, 0);
+    }
+
+    public Vector2 ReturnCaseRef(int size)
+    {
+        int tabX = (int)((transform.position.x ) / Constants.CaseSize + size/2)  ;
+        int tabY = (int)((transform.position.z )/ Constants.CaseSize + size/2);
         Vector2 position = new Vector3( tabX, tabY);
 
         return position;
     }
 
-    public Case ReturnCase()
+    public Case ReturnCase(int size)
     {
-        int i = (int)ReturnCaseRef().x;
-        int j = (int)ReturnCaseRef().y;
+        int i = (int)ReturnCaseRef(size).x;
+        int j = (int)ReturnCaseRef(size).y;
         return plateau.grid[i, j];
     }
     private void OnMouseDown() //Choix de la caméra -> controle du personnage
@@ -75,9 +83,27 @@ public class Personnage : MonoBehaviour
 
         if ( _isSelect )
         {
+            int size = 0;
+            
+            if (level == 0)
+            {
+                size = Constants.MapWidth;
+            }
+
+            if (level == 1)
+            {
+                size = Constants.Map_2;
+            }
             if (!exit)
             {
-                mouv.KeyDeplacement(vitesse);
+                
+                mouv.KeyDeplacement(vitesse, ReturnCase(size));
+            }
+
+            if (exit)
+            {
+                transform.position = new Vector3(0, 60, 0);
+                exit = false;
             }
             mouv.KeyRotation();
             

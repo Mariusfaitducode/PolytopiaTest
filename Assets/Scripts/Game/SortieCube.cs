@@ -9,11 +9,11 @@ public class SortieCube : MonoBehaviour
     public GameObject player;
     private void OnTriggerEnter(Collider other)
     {
-        print("enter ?");
-        print(gameObject.tag);
+        //print("enter ?");
+        //print(gameObject.tag);
         if (other.tag.Equals("Player") && gameObject.tag.Equals("Sortie"))
         {
-            print("Innnn");
+            //print("Innnn");
             
             Inventaire invent = other.GetComponent<Inventaire>();
 
@@ -21,7 +21,7 @@ public class SortieCube : MonoBehaviour
             Item item2 = invent.FindWithName("bois");
             Item item3 = invent.FindWithName("sable");
 
-            if (item.quantite > 20 && item2.quantite > 20
+            /*if (item.quantite > 20 && item2.quantite > 20
                                    && item3.quantite > 20)
             {
                 print("ouvert");
@@ -29,10 +29,15 @@ public class SortieCube : MonoBehaviour
                 player.GetComponent<Personnage>().exit = true;
                 success = true;
 
+            }*/
+            if (!success)
+            {
+                print("Level 1 complete");
+                player = other.gameObject;
+                player.GetComponent<Personnage>().exit = true;
+                success = true;
             }
-
-            print(item.quantite);
-            print(item2);
+            
         }
     }
 
@@ -40,8 +45,8 @@ public class SortieCube : MonoBehaviour
     {
         if (success)
         {
-            transform.Translate(Time.deltaTime * 10 * Vector3.down);
-            player.transform.Translate(Time.deltaTime * 10 * Vector3.down);
+            //transform.Translate(Time.deltaTime * 10 * Vector3.down);
+            //player.transform.Translate(Time.deltaTime * 10 * Vector3.down);
             
         }
     }

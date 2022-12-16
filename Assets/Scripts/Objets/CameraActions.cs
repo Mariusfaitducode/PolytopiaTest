@@ -21,7 +21,7 @@ public class CameraActions : MonoBehaviour
             }
             if (!mouv.KeyRotation())
             {
-                mouv.KeyDeplacement(50f);
+                mouv.KeyDeplacement2(50f);
             }
         }
         else

@@ -22,7 +22,7 @@ public class Case
     
     //private GameObject personnage;
 
-    public Case( CaseType.TerrainType region, int x, int y, GameObject obj, bool sortie)
+    public Case( CaseType.TerrainType region, int x, int y, GameObject obj, bool sortie, int level)
     {
         typeRegion = region;
         
@@ -45,10 +45,21 @@ public class Case
             surfaceHeight = region.height * altitude;
         }
 
+        int size = 0;
+
+        if (level == 0)
+        {
+            size = Constants.MapWidth;
+        }
+        else if (level == 1)
+        {
+            size = Constants.Map_2;
+        }
+
         position = new Vector3();
-        position.x = (tabRef.x * Constants.CaseSize) - Constants.MapWidth * Constants.CaseSize / 2 + Constants.CaseSize / 2;
+        position.x = (tabRef.x * Constants.CaseSize) - size * Constants.CaseSize / 2 + Constants.CaseSize / 2;
         position.y = surfaceHeight / 2;
-        position.z = (tabRef.y * Constants.CaseSize) - Constants.MapHeight * Constants.CaseSize / 2 + Constants.CaseSize / 2;
+        position.z = (tabRef.y * Constants.CaseSize) - size * Constants.CaseSize / 2 + Constants.CaseSize / 2;
 
         caseCube.transform.position = position;
 
