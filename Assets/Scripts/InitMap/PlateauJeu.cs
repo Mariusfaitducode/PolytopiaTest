@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class PlateauJeu : MonoBehaviour
 {
-    public GameObject terrain_1;
+    public GameObject terrain_0;
 
-    public MapGenerator mapGen;
+    public MapGenerator mapGen_0;
 
+    public MapGenerator mapGen_1;
+    
     public Case[,] grid;
 
     public Personnage player;
@@ -21,7 +23,7 @@ public class PlateauJeu : MonoBehaviour
         grid = new Case[Constants.MapWidth, Constants.MapHeight];
         level = 0;
         //InitPlateauJeu();
-        mapGen.Generate3dMap(false, level);
+        mapGen_0.Generate3dMap(true, level);
         level += 1;
         //limite.InitLimite();
         
@@ -48,13 +50,13 @@ public class PlateauJeu : MonoBehaviour
             print("second level");
             validate = true;
             CleanTerrain();
-            terrain_1.SetActive(false);
+            terrain_0.SetActive(false);
             if (level == 1)
             {
                 grid.Initialize();
                 grid = new Case[Constants.Map_2, Constants.Map_2];
             }
-            mapGen.Generate3dMap(true, level);
+            mapGen_1.Generate3dMap(true, level);
         }
     }
 }

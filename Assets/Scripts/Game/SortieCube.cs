@@ -32,7 +32,7 @@ public class SortieCube : MonoBehaviour
             }*/
             if (!success)
             {
-                print("Level 1 complete");
+                print("Level 0 complete");
                 player = other.gameObject;
                 player.GetComponent<Personnage>().exit = true;
                 success = true;
