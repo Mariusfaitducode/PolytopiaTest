@@ -8,8 +8,8 @@ public class MapGenerator : MonoBehaviour
     
     public enum DrawMode {NoiseMap, ColourMap};
     public DrawMode drawMode;
-    public int mapWidth = Constants.MapWidth;
-    public int mapHeight = Constants.MapHeight;
+    public int mapWidth = Constants.MapSize_1;
+    public int mapHeight = Constants.MapSize_1;
     public float noiseScale;
 
     public int octaves;
@@ -26,8 +26,10 @@ public class MapGenerator : MonoBehaviour
     
     private System.Random ran = new System.Random();
 
-    public InitTerrain terrain_1;
-    public InitTerrain terrain_2;
+    public InitTerrain terrain;
+    
+
+    public int level;
 
     /*MapGenerator()
     {
@@ -47,10 +49,25 @@ public class MapGenerator : MonoBehaviour
         terrain = FindObjectOfType<InitTerrain> ();
     }
     }*/
+    public void Start()
+    {
+        
 
-    
+        if (level == 0)
+        {
+            mapWidth = Constants.MapSize_1;
+            mapHeight = Constants.MapSize_1;
+        }
+        else if (level == 1)
+        {
+            mapWidth = Constants.MapSize_2;
+            mapHeight = Constants.MapSize_2;
+        }
+    }
+
 
     public void GenerateMap(){
+        
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
         
         Color[] colourMap = new Color[mapWidth * mapHeight];
@@ -86,15 +103,10 @@ public class MapGenerator : MonoBehaviour
         }
 
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
-
-        if (level == 0)
-        {
-            terrain_1.GenerateTerrain(noiseMap, regions, level);
-        }
-        else if (level == 1)
-        {
-            terrain_2.GenerateTerrain(noiseMap, regions, level);
-        }
+        
+        print("length noise");
+        print(noiseMap.Length);
+        terrain.GenerateTerrain(noiseMap, regions, level);
         
     }
     void OnValidate(){

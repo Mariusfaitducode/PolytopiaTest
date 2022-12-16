@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class PlateauJeu : MonoBehaviour
 {
-    public GameObject terrain_0;
+    public GameObject terrain;
 
-    public MapGenerator mapGen_0;
+    public MapGenerator mapGen;
 
-    public MapGenerator mapGen_1;
+    public GameObject newPlane;
     
     public Case[,] grid;
 
@@ -20,23 +20,26 @@ public class PlateauJeu : MonoBehaviour
 
     void Start()
     {
-        grid = new Case[Constants.MapWidth, Constants.MapHeight];
-        level = 0;
+        int size = 0;
+
+        if (level == 0)
+        {
+            size = Constants.MapSize_1;
+        }
+        else if (level == 1)
+        {
+            size = Constants.MapSize_2;
+        }
+        print(size);
+        
+            
+        grid = new Case[size, size];
+        print(grid.Length);
+        
         //InitPlateauJeu();
-        mapGen_0.Generate3dMap(true, level);
-        level += 1;
+        mapGen.Generate3dMap(true, level);
+        
         //limite.InitLimite();
-        
-    }
-
-    public void CleanTerrain()
-    {
-        
-       DestroyImmediate(GameObject.FindGameObjectWithTag("CaseCube"));
-    }
-
-    public void SetPlateau()
-    {
         
     }
 
@@ -49,14 +52,33 @@ public class PlateauJeu : MonoBehaviour
         {
             print("second level");
             validate = true;
-            CleanTerrain();
-            terrain_0.SetActive(false);
-            if (level == 1)
+            //CleanTerrain();
+            terrain.SetActive(false);
+            
+            newPlane.SetActive(true);
+            gameObject.SetActive(false);
+
+            player.GetComponent<Personnage>().plateau = newPlane.GetComponent<PlateauJeu>();
+
+            /*if (level == 1)
             {
                 grid.Initialize();
+                print(grid);
                 grid = new Case[Constants.Map_2, Constants.Map_2];
+                //print(grid);
             }
-            mapGen_1.Generate3dMap(true, level);
+            mapGen_1.Generate3dMap(true, level);*/
         }
+    }
+    
+    public void CleanTerrain()
+    {
+        
+        DestroyImmediate(GameObject.FindGameObjectWithTag("CaseCube"));
+    }
+
+    public void SetPlateau()
+    {
+        
     }
 }

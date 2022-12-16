@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Constants
 {
-    public const int MapWidth = 30;
-    public const int MapHeight = 30;
+    public const int MapSize_1 = 30;
+    
 
-    public const int Map_2 = 50;
+    public const int MapSize_2 = 50;
 
     public const int CaseSize = 10;
 

@@ -62,11 +62,11 @@ public class LimiteTerrain : MonoBehaviour
             
         GameObject obj = Instantiate(limiteCube);
 
-        position.x = (x * Constants.CaseSize) - Constants.MapWidth * Constants.CaseSize / 2 + Constants.CaseSize / 2;
+        position.x = (x * Constants.CaseSize) - Constants.MapSize_1 * Constants.CaseSize / 2 + Constants.CaseSize / 2;
         
         position.y = plateau.grid[x,z].surfaceHeight + taille / 2;
         
-        position.z = (z * Constants.CaseSize) - Constants.MapHeight * Constants.CaseSize / 2 + Constants.CaseSize / 2;
+        position.z = (z * Constants.CaseSize) - Constants.MapSize_1 * Constants.CaseSize / 2 + Constants.CaseSize / 2;
             
         obj.transform.position = position;
             

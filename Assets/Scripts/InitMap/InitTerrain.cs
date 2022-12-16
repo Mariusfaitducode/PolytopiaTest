@@ -36,7 +36,7 @@ public class InitTerrain : MonoBehaviour
     
     public void GenerateTerrain(float [,] heightMap, CaseType.TerrainType[] regions, int level)
     {
-        int rand = Random.Range(0, Constants.MapWidth * Constants.MapHeight);
+        int rand = Random.Range(0, Constants.MapSize_1 * Constants.MapSize_1);
         //print(rand);
         print("level = " + level);
         
@@ -44,12 +44,12 @@ public class InitTerrain : MonoBehaviour
         
         if (level == 0)
         {
-            size = Constants.MapWidth;
+            size = Constants.MapSize_1;
         }
 
         if (level == 1)
         {
-            size = Constants.Map_2;
+            size = Constants.MapSize_2;
         }
         
         
@@ -69,6 +69,7 @@ public class InitTerrain : MonoBehaviour
                         }
                         else
                         {
+                            print("x="+x+"   y="+y);
                             plateau.grid[x, y] = new Case(regions[i], x, y, obj, false, level);  //Constructeur du cube, permet de créer le tableau
                         }
                         //print("level = "+level);

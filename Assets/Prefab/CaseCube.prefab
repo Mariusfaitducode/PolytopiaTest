@@ -61,6 +61,7 @@ GameObject:
   - component: {fileID: 2882576121651164935}
   - component: {fileID: 4768311232529465247}
   - component: {fileID: 392696278607859648}
+  - component: {fileID: 7479377970380687532}
   m_Layer: 0
   m_Name: CaseCube
   m_TagString: CaseCube
@@ -173,3 +174,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2860968022572633007, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
+--- !u!54 &7479377970380687532
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5278183251501193274}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
