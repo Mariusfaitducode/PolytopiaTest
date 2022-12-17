@@ -161,7 +161,8 @@ public class Personnage : MonoBehaviour
     
     public void KeyDeplacement3(float vitesse)
     {
-        if (!Input.GetKey(KeyCode.RightShift) && Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        if (!Input.GetKey(KeyCode.RightShift) && !Input.GetKey(KeyCode.LeftShift) && 
+            (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0))
         {
             
 

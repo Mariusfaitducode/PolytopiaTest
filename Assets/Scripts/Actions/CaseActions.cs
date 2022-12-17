@@ -16,6 +16,8 @@ public class CaseActions : MonoBehaviour
 
     public bool cutTree;
 
+    public AfficheInvent.ItemOnScreen selected;
+
 
     void Start()
     {
@@ -25,13 +27,36 @@ public class CaseActions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (selected.name != default)
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Inventaire.Item obj = invent.FindWithName(selected.name);
+
+                if (obj.quantite > 0)
+                {
+                    GameObject objet = Instantiate(obj.prefab);
+
+                    
+
+                    objet.transform.position = gameObject.transform.position;
+                    
+                    //objet.transform.parent = gameObject.transform;
+                }
+            }
+        }
     }
 
     public void OnTriggerStay(Collider other)
     {
         //print("CUUUT THIS TREE");
         //print(other);
+        TakeObject(other);
+        
+    }
+
+    public void TakeObject(Collider other)
+    {
         if (Input.GetKey(KeyCode.Space) && !other.gameObject.CompareTag("CaseCube") && !other.gameObject.CompareTag("Sortie"))
         {
             //print("destroy");
@@ -49,16 +74,5 @@ public class CaseActions : MonoBehaviour
 
             cutTree = true;
         }
-    }
-
-    public void doSomething()
-    {
-        //Case actualCase = player.ReturnCase();
-        
-        //En fonctions du terrain, proposer les actions correspondante
-        
-        //Récolter
-        
-        //Construire
     }
 }

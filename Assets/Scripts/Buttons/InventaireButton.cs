@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventaireButton : MonoBehaviour
 {
     public GameObject invent;
+
+    public RawImage isSelect;
 
     public bool open = false;
     public bool lastAction;
@@ -14,11 +17,13 @@ public class InventaireButton : MonoBehaviour
         if (!open)
         {
             invent.SetActive(true);
+            isSelect.enabled = true;
             open = true;
         }
         else
         {
             invent.SetActive(false);
+            isSelect.enabled = false;
             open = false;
         }
     }
@@ -37,10 +42,12 @@ public class InventaireButton : MonoBehaviour
             if (!open)
             {
                 invent.SetActive(true);
+                isSelect.enabled = true;
             }
             else
             {
                 invent.SetActive(false);
+                isSelect.enabled = false;
             }
 
             lastAction = true;
