@@ -12,8 +12,6 @@ public class CaseActions : MonoBehaviour
 
     //public PlateauJeu plateau;
 
-    public Canvas canvas;
-
     public Inventaire invent;
 
     public bool cutTree;
@@ -48,6 +46,8 @@ public class CaseActions : MonoBehaviour
             Destroy(other.gameObject);
 
             //invent.actualize = true;
+
+            cutTree = true;
         }
     }
 
