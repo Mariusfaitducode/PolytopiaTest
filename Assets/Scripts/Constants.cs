@@ -36,4 +36,9 @@ public class Constants
 
         return size;
     }
+    
+    public static void IncrementLevel(int level)
+    {
+        level += 1;
+    }
 }

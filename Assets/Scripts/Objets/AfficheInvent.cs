@@ -39,14 +39,15 @@ public class AfficheInvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (action.cutTree)
+        if (action.GetCutTree() || action.GetPutTree())
         {
-            actualizeItems();
+            print("actualize");
+            ActualizeItems();
         }
         SelectItem();
     }
     
-    public void actualizeItems()
+    public void ActualizeItems()
     {
         //this.quantite;
 
@@ -63,7 +64,7 @@ public class AfficheInvent : MonoBehaviour
 
             
         }
-        action.cutTree = false;
+        //action. = false;
     }
 
     public void SelectItem()
@@ -99,7 +100,7 @@ public class AfficheInvent : MonoBehaviour
                     if (index == 0)
                     {
                         button.isSelect.enabled = true;
-                        action.selected = default;
+                        action.selected.name = default;
                     }
                     else
                     {

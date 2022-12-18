@@ -8,43 +8,41 @@ using UnityEngine;
 
 public class CaseActions : MonoBehaviour
 {
-    //public Personnage player;
+    public Personnage player;
 
     //public PlateauJeu plateau;
 
     public Inventaire invent;
 
-    public bool cutTree;
+    private bool cutTree = false;
+    private bool putTree = false;
 
     public AfficheInvent.ItemOnScreen selected;
 
+    public bool firstAction;
+    private bool lastAction;
+
+    public EditObject edit;
+
+   
+
+    public bool GetCutTree(){return cutTree;}
+    public bool GetPutTree(){return putTree;}
 
     void Start()
     {
         //player = gameObject.GetComponent<Personnage>();
+        selected.name = default;
+        firstAction = true;
+        
     }
     
     // Update is called once per frame
     void Update()
     {
-        if (selected.name != default)
-        {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Inventaire.Item obj = invent.FindWithName(selected.name);
-
-                if (obj.quantite > 0)
-                {
-                    GameObject objet = Instantiate(obj.prefab);
-
-                    
-
-                    objet.transform.position = gameObject.transform.position;
-                    
-                    //objet.transform.parent = gameObject.transform;
-                }
-            }
-        }
+        
+       PutObject();
+       
     }
 
     public void OnTriggerStay(Collider other)
@@ -57,7 +55,9 @@ public class CaseActions : MonoBehaviour
 
     public void TakeObject(Collider other)
     {
-        if (Input.GetKey(KeyCode.Space) && !other.gameObject.CompareTag("CaseCube") && !other.gameObject.CompareTag("Sortie"))
+        //cutTree = false;
+        if (selected.name == default && Input.GetKey(KeyCode.Space) &&
+            !other.gameObject.CompareTag("CaseCube") && !other.gameObject.CompareTag("Sortie"))
         {
             //print("destroy");
 
@@ -73,6 +73,51 @@ public class CaseActions : MonoBehaviour
             //invent.actualize = true;
 
             cutTree = true;
+        }
+    }
+
+    public void PutObject()
+    {
+        lastAction = true;
+        //  putTree = false;
+        if (selected.name != default)
+        {
+            if (Input.GetKey(KeyCode.Space) && firstAction)
+            {
+                Inventaire.Item obj = invent.FindWithName(selected.name);
+
+                if (obj.quantite > 0)
+                {
+                    GameObject objet = Instantiate(obj.prefab);
+
+                    
+                    objet.transform.position = gameObject.transform.position;
+
+                    Vector3 position = objet.transform.position;
+
+                    int size = Constants.GetConstant(player.level);
+
+                    Case actualCase = player.ReturnCase(size);
+                    
+                    edit.Edit(objet, actualCase.typeRegion);
+                    
+                    edit.Biodiversite(actualCase, player.plateau);
+
+
+                    invent.DecrementQuantite(obj);
+                    putTree = true;
+                    firstAction = false;
+                    lastAction = false;
+                    //objet.transform.parent = gameObject.transform;
+                }
+            }
+            else if (lastAction && !Input.GetKey(KeyCode.Space))
+            {
+                
+                firstAction = true;
+            }
+
+            
         }
     }
 }

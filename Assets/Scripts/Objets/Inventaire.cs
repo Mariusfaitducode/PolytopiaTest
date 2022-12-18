@@ -75,5 +75,27 @@ public class Inventaire : MonoBehaviour
         }
         
     }
+    
+    public void DecrementQuantite(Item item)
+    {
+        bool isInList = false;
+        for (int i = 0; i < collection.Length; i++)
+        {
+            Item var = collection[i];
+            if (var.name.Equals(item.name))
+            {
+                isInList = true;
+                collection[i].quantite -= 1;
+                print(var.quantite);
+            }
+        }
+
+        if (!isInList)
+        {
+            print("append");
+            collection.Append(item);
+        }
+        
+    }
 
 }

@@ -13,7 +13,7 @@ public class Case
     //private int tabX;
     //private int tabY;
 
-    private Vector2 tabRef;
+    public Vector2 tabRef;
     private Vector3 position;
 
     public float surfaceHeight;
