@@ -20,16 +20,9 @@ public class PlateauJeu : MonoBehaviour
 
     void Start()
     {
-        int size = 0;
-
-        if (level == 0)
-        {
-            size = Constants.MapSize_1;
-        }
-        else if (level == 1)
-        {
-            size = Constants.MapSize_2;
-        }
+        int size = Constants.GetConstant(level);
+        
+        print("size =" + size);
         print(size);
         
             

@@ -97,16 +97,7 @@ public class Personnage : MonoBehaviour
 
         if (_isSelect)
         {
-            int size = 0;
-
-            if (level == 0)
-            {
-                size = Constants.MapSize_1;
-            }
-            else if (level == 1)
-            {
-                size = Constants.MapSize_2;
-            }
+            int size = Constants.GetConstant(level);
 
             height = transform.position.y;
 
@@ -170,7 +161,8 @@ public class Personnage : MonoBehaviour
     
     public void KeyDeplacement3(float vitesse)
     {
-        if (!Input.GetKey(KeyCode.RightShift) && Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
+        if (!Input.GetKey(KeyCode.RightShift) && !Input.GetKey(KeyCode.LeftShift) && 
+            (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0))
         {
             
 

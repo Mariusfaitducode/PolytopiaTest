@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Constants
 {
+
+    public const int MapSizeStart = 100;
     public const int MapSize_1 = 30;
     
 
@@ -12,4 +14,31 @@ public class Constants
     public const int CaseSize = 10;
 
     public const float altitude = 60f; //amplitude de l'altitude des blocks
+
+    public static int GetConstant(int level)
+    {
+        int size = 0;
+        
+        if (level == -1)
+        {
+            size = Constants.MapSizeStart;
+        }
+        
+        if (level == 0)
+        {
+            size = Constants.MapSize_1;
+        }
+
+        if (level == 1)
+        {
+            size = Constants.MapSize_2;
+        }
+
+        return size;
+    }
+    
+    public static void IncrementLevel(int level)
+    {
+        level += 1;
+    }
 }

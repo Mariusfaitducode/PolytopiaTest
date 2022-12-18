@@ -13,7 +13,7 @@ public class Case
     //private int tabX;
     //private int tabY;
 
-    private Vector2 tabRef;
+    public Vector2 tabRef;
     private Vector3 position;
 
     public float surfaceHeight;
@@ -26,17 +26,21 @@ public class Case
     {
         if (level == 0)
         {
-            CaseWorld_0(region, x, y, obj, sortie);
+            CaseWorld_0(region, x, y, obj, sortie, level);
         }
         else if (level == 1)
         {
-            CaseWorld_1(region, x, y, obj, sortie);
+            CaseWorld_1(region, x, y, obj, sortie, level);
         }
-        
-        
+        else
+        {
+            CaseWorld_1(region, x, y, obj, sortie, level);
+        }
+
+
     }
 
-    public void CaseWorld_0(CaseType.TerrainType region, int x, int y, GameObject obj, bool sortie)
+    public void CaseWorld_0(CaseType.TerrainType region, int x, int y, GameObject obj, bool sortie, int level)
     {
         typeRegion = region;
         
@@ -59,7 +63,7 @@ public class Case
             surfaceHeight = region.height * altitude;
         }
 
-        float size = Constants.MapSize_1;
+        float size = Constants.GetConstant(level);
 
         position = new Vector3();
         position.x = (tabRef.x * Constants.CaseSize) - size * Constants.CaseSize / 2 + Constants.CaseSize / 2;
@@ -87,7 +91,7 @@ public class Case
         obj.GetComponent<BlockCase>().tabRef = tabRef;
     }
     
-    public void CaseWorld_1(CaseType.TerrainType region, int x, int y, GameObject obj, bool sortie)
+    public void CaseWorld_1(CaseType.TerrainType region, int x, int y, GameObject obj, bool sortie, int level)
     {
         typeRegion = region;
         
@@ -110,7 +114,7 @@ public class Case
             surfaceHeight = region.height * altitude;
         }
 
-        float size = Constants.MapSize_2;
+        float size = Constants.GetConstant(level);
 
         position = new Vector3();
         position.x = (tabRef.x * Constants.CaseSize) - size * Constants.CaseSize / 2 + Constants.CaseSize / 2;

@@ -17,9 +17,9 @@ public class SortieCube : MonoBehaviour
             
             Inventaire invent = other.GetComponent<Inventaire>();
 
-            Item item = invent.FindWithName("pierre");
-            Item item2 = invent.FindWithName("bois");
-            Item item3 = invent.FindWithName("sable");
+            Inventaire.Item item = invent.FindWithName("pierre");
+            Inventaire.Item item2 = invent.FindWithName("bois");
+            Inventaire.Item item3 = invent.FindWithName("sable");
 
             if (item.quantite > 20 && item2.quantite > 20
                                    && item3.quantite > 20)

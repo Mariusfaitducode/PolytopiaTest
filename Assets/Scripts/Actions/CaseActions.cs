@@ -8,71 +8,116 @@ using UnityEngine;
 
 public class CaseActions : MonoBehaviour
 {
-    //public Personnage player;
+    public Personnage player;
 
     //public PlateauJeu plateau;
 
-    public Canvas canvas;
-
     public Inventaire invent;
 
-    public bool cutTree;
+    private bool cutTree = false;
+    private bool putTree = false;
 
+    public AfficheInvent.ItemOnScreen selected;
+
+    public bool firstAction;
+    private bool lastAction;
+
+    public EditObject edit;
+
+   
+
+    public bool GetCutTree(){return cutTree;}
+    public bool GetPutTree(){return putTree;}
 
     void Start()
     {
         //player = gameObject.GetComponent<Personnage>();
+        selected.name = default;
+        firstAction = true;
+        
     }
     
     // Update is called once per frame
     void Update()
     {
         
+       PutObject();
+       
     }
 
     public void OnTriggerStay(Collider other)
     {
         //print("CUUUT THIS TREE");
         //print(other);
-        if (Input.GetKey(KeyCode.Space) && !other.gameObject.CompareTag("CaseCube") && !other.gameObject.CompareTag("Sortie"))
+        TakeObject(other);
+        
+    }
+
+    public void TakeObject(Collider other)
+    {
+        //cutTree = false;
+        if (selected.name == default && Input.GetKey(KeyCode.Space) &&
+            !other.gameObject.CompareTag("CaseCube") && !other.gameObject.CompareTag("Sortie"))
         {
             //print("destroy");
 
-            Item item = invent.FindWithName(other.gameObject.tag);
+            Inventaire.Item item = invent.FindWithName(other.gameObject.tag);
+            //print(item.name);
 
-            if ( item != default) //Actualiser le nombre d'objets
-            {
-                item.IncrementQuantite();
-                item.itemOnScreen.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name + "\n"+ item.quantite);
-            }
-            else    //Nouvel objet dans l'inventaire
-            {
-                invent.collection.Add(new Item(other.gameObject.tag));
-                item = invent.FindWithName(other.gameObject.tag);
-                
-                item.itemOnScreen = Instantiate(invent.itemDispPF);
-                item.itemOnScreen.transform.parent = canvas.transform;
-                item.itemOnScreen.transform.position = new Vector3(invent.collection.Count * 200,100,0);
-                
-                item.itemOnScreen.GetComponentInChildren<TextMeshProUGUI>().SetText(item.name + "\n"+ item.quantite);
-            }
+            invent.IncrementQuantite(item);
             
-            invent.DispList();
+            //invent.DispList();
             
             Destroy(other.gameObject);
 
             //invent.actualize = true;
+
+            cutTree = true;
         }
     }
 
-    public void doSomething()
+    public void PutObject()
     {
-        //Case actualCase = player.ReturnCase();
-        
-        //En fonctions du terrain, proposer les actions correspondante
-        
-        //Récolter
-        
-        //Construire
+        lastAction = true;
+        //  putTree = false;
+        if (selected.name != default)
+        {
+            if (Input.GetKey(KeyCode.Space) && firstAction)
+            {
+                Inventaire.Item obj = invent.FindWithName(selected.name);
+
+                if (obj.quantite > 0)
+                {
+                    GameObject objet = Instantiate(obj.prefab);
+
+                    
+                    objet.transform.position = gameObject.transform.position;
+
+                    Vector3 position = objet.transform.position;
+
+                    int size = Constants.GetConstant(player.level);
+
+                    Case actualCase = player.ReturnCase(size);
+                    
+                    edit.Edit(objet, actualCase.typeRegion);
+                    
+                    edit.Biodiversite(actualCase, player.plateau);
+
+
+                    invent.DecrementQuantite(obj);
+                    putTree = true;
+                    firstAction = false;
+                    lastAction = false;
+                    //objet.transform.parent = gameObject.transform;
+                }
+            }
+            else if (lastAction && !Input.GetKey(KeyCode.Space))
+            {
+                
+                firstAction = true;
+            }
+
+            
+        }
     }
 }
