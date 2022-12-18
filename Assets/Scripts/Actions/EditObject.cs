@@ -5,6 +5,8 @@ using UnityEngine;
 public class EditObject : MonoBehaviour
 {
     private InitTerrain terrain;
+
+    public int countBio = 0;
     
     public CaseType.TerrainType[] regions;
     
@@ -41,11 +43,20 @@ public class EditObject : MonoBehaviour
 
             }
         }
+
+        countBio = plateau.CountBioCase();
+        print("count biocase = "+countBio);
+        if (countBio >= 540)
+        {
+            print("instantiate fox");
+        }
+        
     }
 
     public void ChangeColourCube(PlateauJeu plateau, int i, int j)
     {
         plateau.grid[i, j].caseCube.GetComponent<MeshRenderer>().material.color = Color.green;
+        plateau.grid[i, j].bio = true;
     }
     
     //public void GiveColorWithHeight()

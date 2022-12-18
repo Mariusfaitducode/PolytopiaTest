@@ -19,6 +19,8 @@ public class Case
     public float surfaceHeight;
 
     public float altitude = 60f; // dénivelé
+
+    public bool bio;
     
     //private GameObject personnage;
 
@@ -93,6 +95,8 @@ public class Case
     
     public void CaseWorld_1(CaseType.TerrainType region, int x, int y, GameObject obj, bool sortie, int level)
     {
+        bio = false;
+        
         typeRegion = region;
         
         caseCube = obj;

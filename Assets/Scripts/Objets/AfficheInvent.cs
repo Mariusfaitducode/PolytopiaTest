@@ -17,10 +17,14 @@ public class AfficheInvent : MonoBehaviour
     }
     
     public ItemOnScreen[] collection;
+
+    public ItemOnScreen bio;
     
     public Inventaire invent;
 
     public CaseActions action;
+
+    public EditObject edit;
 
     public InventaireButton button;
 
@@ -63,6 +67,11 @@ public class AfficheInvent : MonoBehaviour
             }
 
             
+        }
+
+        if (bio.isSelect.enabled)
+        {
+            bio.quantite.text = edit.countBio.ToString()+"/540";
         }
         //action. = false;
     }

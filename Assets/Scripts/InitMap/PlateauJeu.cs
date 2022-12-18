@@ -74,4 +74,19 @@ public class PlateauJeu : MonoBehaviour
     {
         
     }
+
+    public int CountBioCase()
+    {
+        int count = 0;
+
+        foreach (Case var in grid)
+        {
+            if (var.bio)
+            {
+                count += 1;
+            }
+        }
+
+        return count;
+    }
 }
