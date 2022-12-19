@@ -10,6 +10,7 @@ TagManager:
   - pierre
   - sable
   - Sortie
+  - fox
   layers:
   - Default
   - TransparentFX

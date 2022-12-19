@@ -55,17 +55,22 @@ public class InitTerrain : MonoBehaviour
                         
                         if (rand == 0)//cube de sortie
                         {
-                            plateau.grid[x, y] = new Case(regions[i], x, y, obj, true, level);  //Constructeur du cube, permet de créer le tableau
+                            plateau.grid[x, y] = new Case(regions[i], currentHeight, x, y, obj, true, level);  //Constructeur du cube, permet de créer le tableau
                         }
                         else
                         {
                             //print("x="+x+"   y="+y);
-                            plateau.grid[x, y] = new Case(regions[i], x, y, obj, false, level);  //Constructeur du cube, permet de créer le tableau
+                            plateau.grid[x, y] = new Case(regions[i], currentHeight, x, y, obj, false, level);  //Constructeur du cube, permet de créer le tableau
                         }
                         //print("level = "+level);
+
                         if (level == 0)
                         {
-                            GenerateDecor(plateau.grid[x,y]);
+                            GenerateDecor(plateau.grid[x,y], 100);
+                        }
+                        if ( level == 2)
+                        {
+                            GenerateDecor(plateau.grid[x,y], 200);
                             
                         }
 
@@ -85,45 +90,45 @@ public class InitTerrain : MonoBehaviour
         print("arbre =" + arbre + "\npierre =" + pierre + "\nsable = " + sable + "\nbuisson = " + buisson);
     }
     
-    public void GenerateDecor( Case newCase)
+    public void GenerateDecor( Case newCase, int amplitude)
     {
 
         if (newCase.typeRegion.name.Equals(("Sand")))
         {
-            SandWorld(newCase);
+            SandWorld(newCase, amplitude);
         }
         else if (newCase.typeRegion.name.Equals("LowLand"))
         {
-            LowLandWorld(newCase);
+            LowLandWorld(newCase, amplitude);
         }
 
         else if (newCase.typeRegion.name.Equals("Land"))
         { 
-            MidLandWorld(newCase);
+            MidLandWorld(newCase, amplitude);
         }
         
         else if (newCase.typeRegion.name.Equals("HighLand"))
         {
-            HighLandWorld(newCase);
+            HighLandWorld(newCase, amplitude);
         }
         
         else if (newCase.typeRegion.name.Equals("Mountain"))
         {
-            MountainWorld(newCase);
+            MountainWorld(newCase, amplitude);
         }
         
         else if (newCase.typeRegion.name.Equals("HighMountain"))
         {
-            HighMountainWorld(newCase);
+            HighMountainWorld(newCase, amplitude);
         }
         else if (newCase.typeRegion.name.Equals("Snow"))
         {
-           SnowWorld(newCase);
+           SnowWorld(newCase, amplitude);
         }
         
     }
 
-    public void SandWorld(Case newCase)
+    public void SandWorld(Case newCase, int amplitude)
     {
         //ChangeColor(newCase.caseCube);
         
@@ -137,12 +142,13 @@ public class InitTerrain : MonoBehaviour
             {
                 newSand[i] = Instantiate(FindDecorWithName("sable").prefab);
                 PlacementDecor(newSand[i], newCase);
+                ChangeScale(newSand[i], amplitude / 100);
                 sable += 1;
             }
                 
         }
     }
-    public void LowLandWorld(Case newCase)
+    public void LowLandWorld(Case newCase, int amplitude)
     {
         //ChangeColor(newCase.caseCube);
         
@@ -153,7 +159,7 @@ public class InitTerrain : MonoBehaviour
         {
             newBuisson = Instantiate(FindDecorWithName("buisson_plaines").prefab);
             
-            ChangeScale(newBuisson, 100);
+            ChangeScale(newBuisson, amplitude);
             ChangeColor(newBuisson);
             buisson += 1;
         }
@@ -170,7 +176,7 @@ public class InitTerrain : MonoBehaviour
 
         }
         ChangeColor2(newTree, 1);
-        ChangeScale(newTree,10);
+        ChangeScale(newTree,amplitude);
         PlacementDecor(newTree, newCase);
         if (newTree != default && newBuisson != default)
         {
@@ -182,7 +188,7 @@ public class InitTerrain : MonoBehaviour
             PlacementDecor(newBuisson, newCase);
         }
     }
-    public void MidLandWorld(Case newCase)
+    public void MidLandWorld(Case newCase, int amplitude)
     {
         //ChangeColor(newCase.caseCube);
         
@@ -205,15 +211,15 @@ public class InitTerrain : MonoBehaviour
             arbre += 1;
         }
         
-        ChangeScale(newBuisson, 100);
+        ChangeScale(newBuisson, amplitude);
         ChangeColor2(newBuisson, 0);
         PlacementDecor(newBuisson, newCase);
         ChangeColor2(newTree, 1);
-        ChangeScale(newTree,15);
+        ChangeScale(newTree,amplitude/5);
         PlacementDecor(newTree, newCase);
         
     }
-    public void HighLandWorld(Case newCase)
+    public void HighLandWorld(Case newCase, int amplitude)
     {
         //ChangeColor(newCase.caseCube);
         
@@ -239,7 +245,7 @@ public class InitTerrain : MonoBehaviour
         }
 
         
-        ChangeScale(newTree, 5);
+        ChangeScale(newTree, amplitude/10);
         PlacementDecor(newTree, newCase);
         if (newTree != default && newRoc != default)
         {
@@ -251,7 +257,7 @@ public class InitTerrain : MonoBehaviour
             PlacementDecor(newRoc, newCase);
         }
     }
-    public void MountainWorld(Case newCase)
+    public void MountainWorld(Case newCase, int amplitude)
     {
         //ChangeColor(newCase.caseCube);
         
@@ -262,7 +268,7 @@ public class InitTerrain : MonoBehaviour
         {
             newTree = Instantiate(FindDecorWithName("sapin").prefab);
             arbre += 1;
-            ChangeScale(newTree, 25);
+            ChangeScale(newTree, amplitude / 3);
             ChangeColor3(newTree, 1);
             PlacementDecor(newTree, newCase);
         }
@@ -270,7 +276,7 @@ public class InitTerrain : MonoBehaviour
         {
             newTree = Instantiate(FindDecorWithName("tronc").prefab);
             arbre += 1;
-            ChangeScale(newTree, 10);
+            ChangeScale(newTree, amplitude / 8);
             PlacementDecor(newTree, newCase);
         }
         else if (randNumber <= 4)
@@ -296,13 +302,13 @@ public class InitTerrain : MonoBehaviour
                 newRoc[i] = Instantiate(FindDecorWithName("pierre").prefab);
                 pierre += 1;
                 
-                ChangeScale(newRoc[i], 20);
+                ChangeScale(newRoc[i], amplitude / 5);
                 PlacementDecor(newRoc[i], newCase);
             }
                 
         }
     }
-    public void HighMountainWorld(Case newCase)
+    public void HighMountainWorld(Case newCase, int amplitude)
     {
         //ChangeColor(newCase.caseCube);
         
@@ -314,7 +320,7 @@ public class InitTerrain : MonoBehaviour
         {
             newTree = Instantiate(FindDecorWithName("sapin").prefab);
             arbre += 1;
-            ChangeScale(newTree, 25);
+            ChangeScale(newTree, amplitude / 3);
             ChangeColor3(newTree,1);
             PlacementDecor(newTree, newCase);
         }
@@ -322,7 +328,7 @@ public class InitTerrain : MonoBehaviour
         {
             newTree = Instantiate(FindDecorWithName("tronc").prefab);
             arbre += 1;
-            ChangeScale(newTree, 10);
+            ChangeScale(newTree, amplitude / 7);
             PlacementDecor(newTree, newCase);
         }
             
@@ -333,13 +339,13 @@ public class InitTerrain : MonoBehaviour
             {
                 newRoc[i] = Instantiate(FindDecorWithName("pierre").prefab);
                 pierre += 1;
-                ChangeScale(newRoc[i], 50);
+                ChangeScale(newRoc[i], amplitude / 2);
                 PlacementDecor(newRoc[i], newCase);
             }
         }
     }
 
-    public void SnowWorld(Case newCase)
+    public void SnowWorld(Case newCase, int amplitude)
     {
         GameObject[] newRoc = default;
         GameObject newTree = default;
@@ -349,7 +355,7 @@ public class InitTerrain : MonoBehaviour
         {
             newTree = Instantiate(FindDecorWithName("tronc").prefab);
             arbre += 1;
-            ChangeScale(newTree, 10);
+            ChangeScale(newTree, amplitude / 8);
             PlacementDecor(newTree, newCase);
         }
             
@@ -360,7 +366,7 @@ public class InitTerrain : MonoBehaviour
             {
                 newRoc[i] = Instantiate(FindDecorWithName("pierre").prefab);
                 pierre += 1;
-                ChangeScale(newRoc[i], 10);
+                ChangeScale(newRoc[i], amplitude / 8);
                 PlacementDecor(newRoc[i], newCase);
             }
         }

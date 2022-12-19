@@ -10,11 +10,15 @@ public class Constants
     
 
     public const int MapSize_2 = 50;
+    
+    public const int MapSize_3 = 60;
 
     public const int CaseSize = 10;
 
     public const float altitude = 60f; //amplitude de l'altitude des blocks
 
+    public const int bioCase = 100;
+    
     public static int GetConstant(int level)
     {
         int size = 0;
@@ -32,6 +36,11 @@ public class Constants
         if (level == 1)
         {
             size = Constants.MapSize_2;
+        }
+
+        if (level == 2)
+        {
+            size = Constants.MapSize_3;
         }
 
         return size;

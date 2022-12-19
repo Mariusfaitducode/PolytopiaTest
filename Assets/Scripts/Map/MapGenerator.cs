@@ -52,6 +52,7 @@ public class MapGenerator : MonoBehaviour
     public void Start()
     {
         int size = Constants.GetConstant(level);
+        print(size);
 
         mapWidth = size;
         mapHeight = size;
@@ -93,6 +94,11 @@ public class MapGenerator : MonoBehaviour
         {
             seed = ran.Next(0, 100);
         }
+        int size = Constants.GetConstant(level);
+        print(size);
+
+        mapWidth = size;
+        mapHeight = size;
 
         float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
         

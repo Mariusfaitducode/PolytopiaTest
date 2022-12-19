@@ -7,6 +7,9 @@ using UnityStandardAssets.CrossPlatformInput;
 
 namespace MalbersAnimations
 {
+    
+    
+    
     public enum InputType
     {
         Input, Key
@@ -138,6 +141,8 @@ namespace MalbersAnimations
 
     public class MalbersInput : MonoBehaviour
     {
+        public Deplacements deplacements;
+        
         private iMalbersInputs character;
         private Vector3 m_CamForward;
         private Vector3 m_Move;
@@ -245,6 +250,9 @@ namespace MalbersAnimations
         {
             if (Camera.main != null)   // get the transform of the main camera
                 m_Cam = Camera.main.transform;
+
+            deplacements = GetComponent<Deplacements>();
+
         }
 
         void OnDisable()
@@ -280,7 +288,38 @@ namespace MalbersAnimations
             if (!ActiveVertical) v = 0;
             if (!ActiveHorizontal) h = 0;
             if (character != null) SetInput();
+            
+            int size = Constants.GetConstant(deplacements.level);
+            Case actualCase = ReturnCase(size);
+            
+            RectifHeight(actualCase);
 
+        }
+        
+        public Vector2 ReturnCaseRef(int size)
+        {
+            int tabX = (int)((transform.position.x ) / Constants.CaseSize + size/2)  ;
+            int tabY = (int)((transform.position.z )/ Constants.CaseSize + size/2);
+            Vector2 position = new Vector3( tabX, tabY);
+
+            return position;
+        }
+
+        public Case ReturnCase(int size)
+        {
+            int i = (int)ReturnCaseRef(size).x;
+            int j = (int)ReturnCaseRef(size).y;
+            return deplacements.plateau.grid[i, j];
+        }
+        
+        public void RectifHeight(Case actualCase)
+        {
+            float newHeight = actualCase.surfaceHeight;
+        
+            print("height fox = "+newHeight);
+            print("region = "+ actualCase.typeRegion.height);
+            gameObject.transform.position = new Vector3(gameObject.transform.position.x, newHeight,
+                gameObject.transform.position.z);
         }
 
         public virtual Vector3 CameraInputBased()

@@ -24,7 +24,7 @@ public class Case
     
     //private GameObject personnage;
 
-    public Case( CaseType.TerrainType region, int x, int y, GameObject obj, bool sortie, int level)
+    public Case( CaseType.TerrainType region, float currentHeight, int x, int y, GameObject obj, bool sortie, int level)
     {
         if (level == 0)
         {
@@ -34,9 +34,9 @@ public class Case
         {
             CaseWorld_1(region, x, y, obj, sortie, level);
         }
-        else
+        else if (level == 2)
         {
-            CaseWorld_1(region, x, y, obj, sortie, level);
+            CaseWorld_2(region, currentHeight, x, y, obj, sortie, level);
         }
 
 
@@ -110,12 +110,64 @@ public class Case
         if (typeRegion.name.Equals("Water"))
         {
             //surfaceHeight = 0.4f * Constants.altitude;
-            surfaceHeight = region.height * altitude ;
+            surfaceHeight = altitude ;
         }
         else
         {
             //surfaceHeight = currentHeight * Constants.altitude;
-            surfaceHeight = region.height * altitude;
+            surfaceHeight = altitude;
+        }
+
+        float size = Constants.GetConstant(level);
+
+        position = new Vector3();
+        position.x = (tabRef.x * Constants.CaseSize) - size * Constants.CaseSize / 2 + Constants.CaseSize / 2;
+        position.y = surfaceHeight / 2;
+        position.z = (tabRef.y * Constants.CaseSize) - size * Constants.CaseSize / 2 + Constants.CaseSize / 2;
+
+        caseCube.transform.position = position;
+
+        caseCube.transform.localScale = new Vector3(Constants.CaseSize, surfaceHeight, Constants.CaseSize);
+
+        if (!sortie)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = region.colour;
+        }
+        else
+        {
+            obj.GetComponent<MeshRenderer>().material.color = Color.yellow;
+            obj.tag = String.Copy("Sortie");
+            
+            obj.GetComponent<BoxCollider>().isTrigger = true;
+            obj.GetComponent<SortieCube>().enabled = true;
+        }
+        
+
+        obj.GetComponent<BlockCase>().tabRef = tabRef;
+    }
+    
+    
+    public void CaseWorld_2(CaseType.TerrainType region, float currentHeight, int x, int y, GameObject obj, bool sortie, int level)
+    {
+        typeRegion = region;
+        
+        caseCube = obj;
+
+        tabRef.x = x;
+        tabRef.y = y;
+
+        //float height;  //Hauteur de la surface du cube
+        //float height = region.height * altitude;
+
+        if (typeRegion.name.Equals("Water"))
+        {
+            //surfaceHeight = 0.4f * Constants.altitude;
+            surfaceHeight = currentHeight * altitude ;
+        }
+        else
+        {
+            //surfaceHeight = currentHeight * Constants.altitude;
+            surfaceHeight = currentHeight * altitude;
         }
 
         float size = Constants.GetConstant(level);
