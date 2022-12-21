@@ -6,12 +6,16 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     
-    public enum DrawMode {NoiseMap, ColourMap};
+    public enum DrawMode {NoiseMap, ColourMap, MeshMap};
     public DrawMode drawMode;
     public int mapWidth = Constants.MapSize_1;
     public int mapHeight = Constants.MapSize_1;
+    
+    //const int mapChunkSize = 241;
+    [Range(0,6)]
+    public int levelOfDetail;
+    
     public float noiseScale;
-
     public int octaves;
     [Range(0,1)]
     public float persistance;
@@ -27,6 +31,13 @@ public class MapGenerator : MonoBehaviour
     private System.Random ran = new System.Random();
 
     public InitTerrain terrain;
+    
+    public float meshHeightMultiplier;
+    public AnimationCurve meshHeightCurve;
+
+    public bool autoUpdate;
+
+    
     
 
     public int level;
@@ -82,30 +93,59 @@ public class MapGenerator : MonoBehaviour
         else if (drawMode == DrawMode.ColourMap){
             display.DrawTexture (TextureGenerator.TextureFromColourMap(colourMap, mapWidth, mapHeight));
         }
-        /*else if (drawMode == DrawMode.Map3d)
+        else if (drawMode == DrawMode.MeshMap)
         {
-            Generate3dMap();
-        }*/
+            display.DrawMesh (MeshGenerator.GenerateTerrainMesh (noiseMap, meshHeightMultiplier, meshHeightCurve, levelOfDetail),
+                TextureGenerator.TextureFromColourMap (colourMap, mapWidth, mapHeight));
+        }
     }
 
     public void Generate3dMap(bool rand, int level)
     {
-        if (rand)
-        {
-            seed = ran.Next(0, 100);
-        }
         int size = Constants.GetConstant(level);
         print(size);
 
         mapWidth = size;
         mapHeight = size;
 
-        float[,] noiseMap = Noise.GenerateNoiseMap (mapWidth, mapHeight, noiseScale, seed, octaves, persistance, lacunarity, offset);
+        float[,] noiseMap = Noise.GenerateNoiseMap(mapWidth, mapHeight, noiseScale, seed, octaves, persistance,
+            lacunarity, offset);
         
+        Color[] colourMap = new Color[mapWidth * mapHeight];
+        
+        for ( int y = 0; y < mapWidth; y++){
+            for ( int x = 0; x < mapHeight; x++){
+                float currentHeight = noiseMap [x, y];
+                for (int i = 0; i < regions.Length; i++){
+                    if (currentHeight <= regions[i].height){
+                        colourMap [y * mapWidth + x] = regions[i].colour;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (rand)
+        {
+            seed = ran.Next(0, 100);
+        }
+
+        
+
         print("length noise");
         print(noiseMap.Length);
-        terrain.GenerateTerrain(noiseMap, regions, level);
         
+        MapDisplay display = FindObjectOfType<MapDisplay> ();
+        
+        if (drawMode == DrawMode.MeshMap)
+        {
+           display.DrawMesh (MeshGenerator.GenerateTerrainMesh (noiseMap, meshHeightMultiplier, meshHeightCurve, levelOfDetail),
+                TextureGenerator.TextureFromColourMap (colourMap, mapWidth, mapHeight));
+        }
+        else
+        {
+            terrain.GenerateTerrain(noiseMap, regions, level);
+        }
     }
     void OnValidate(){
         if (mapWidth < 1){

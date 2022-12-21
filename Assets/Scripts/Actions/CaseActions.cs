@@ -69,7 +69,7 @@ public class CaseActions : MonoBehaviour
     {
         //cutTree = false;
         if (selected.name == default && Input.GetKey(KeyCode.Space) &&
-            !other.gameObject.CompareTag("CaseCube") && !other.gameObject.CompareTag("Sortie"))
+                      !other.gameObject.CompareTag("CaseCube") && !other.gameObject.CompareTag("Sortie"))
         {
             print("tag = "+other.tag+"  name = "+other.name);
             if (other.gameObject.layer.Equals(20)) //layer animal 

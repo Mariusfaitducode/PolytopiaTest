@@ -26,7 +26,7 @@ public class Deplacements : MonoBehaviour
         int size = Constants.GetConstant(level);
         Case actualCase = ReturnCase(size);
 
-        //RectifHeight(actualCase);
+        RectifHeight(actualCase);
 
         
         // Calcul de la direction vers laquelle l'objet doit se déplacer pour éviter l'obstacle
