@@ -19,9 +19,5 @@ public class MapGeneratorEditor : Editor
             mapGen.GenerateMap ();
             //mapGen.Generate3dMap();
         }
-        /*
-        if (GUILayout.Button ("Delete")){
-            mapGen.plateau.CleanTerrain();
-        }*/
     }
 }
