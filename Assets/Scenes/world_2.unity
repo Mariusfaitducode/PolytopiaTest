@@ -2812,7 +2812,7 @@ BoxCollider:
   m_GameObject: {fileID: 1114309098}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3003,6 +3003,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textureRender: {fileID: 0}
+  meshFilter: {fileID: 0}
+  meshRenderer: {fileID: 0}
 --- !u!114 &1145613938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3018,6 +3020,7 @@ MonoBehaviour:
   drawMode: 0
   mapWidth: 100
   mapHeight: 100
+  levelOfDetail: 0
   noiseScale: 23.3
   octaves: 6
   persistance: 0.521
@@ -3090,6 +3093,14 @@ MonoBehaviour:
     colour: {r: 1, g: 1, b: 1, a: 0}
   plateau: {fileID: 1145613939}
   terrain: {fileID: 1145613936}
+  meshHeightMultiplier: 0
+  meshHeightCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  autoUpdate: 0
   level: 2
 --- !u!114 &1145613939
 MonoBehaviour:
@@ -3345,6 +3356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textureRender: {fileID: 0}
+  meshFilter: {fileID: 0}
+  meshRenderer: {fileID: 0}
 --- !u!114 &1225101697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3360,6 +3373,7 @@ MonoBehaviour:
   drawMode: 0
   mapWidth: 50
   mapHeight: 50
+  levelOfDetail: 0
   noiseScale: 23.3
   octaves: 6
   persistance: 0.521
@@ -3429,6 +3443,14 @@ MonoBehaviour:
     colour: {r: 1, g: 0.77254903, b: 1, a: 0}
   plateau: {fileID: 1225101698}
   terrain: {fileID: 1225101695}
+  meshHeightMultiplier: 0
+  meshHeightCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  autoUpdate: 0
   level: 1
 --- !u!114 &1225101698
 MonoBehaviour:
