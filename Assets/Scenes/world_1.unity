@@ -434,6 +434,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textureRender: {fileID: 0}
+  meshFilter: {fileID: 0}
+  meshRenderer: {fileID: 0}
 --- !u!114 &153374594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,8 +449,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 0
-  mapWidth: 50
-  mapHeight: 50
+  mapChunkSize: 30
+  levelOfDetail: 0
   noiseScale: 23.3
   octaves: 6
   persistance: 0.521
@@ -518,6 +520,16 @@ MonoBehaviour:
     colour: {r: 1, g: 0.77254903, b: 1, a: 0}
   plateau: {fileID: 153374595}
   terrain: {fileID: 153374592}
+  meshHeightMultiplier: 0
+  meshHeightCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  useFallof: 0
+  normalizeMode: 0
+  autoUpdate: 0
   level: 1
 --- !u!114 &153374595
 MonoBehaviour:
@@ -1778,6 +1790,10 @@ PrefabInstance:
     - target: {fileID: -8824656693036545596, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: vitesse
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: -8824656693036545596, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
+      propertyPath: _isSelect
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8824656693036545596, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: playerCam
@@ -3520,6 +3536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plateau: {fileID: 0}
+  _isSelect: 0
   vitesse: 15
   defaultCam: {fileID: 158829357}
   playerCam: {fileID: 1553839516}
@@ -5410,8 +5427,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 1
-  mapWidth: 50
-  mapHeight: 50
+  mapChunkSize: 30
+  levelOfDetail: 0
   noiseScale: 23.3
   octaves: 6
   persistance: 0.521
@@ -5481,6 +5498,16 @@ MonoBehaviour:
     colour: {r: 1, g: 0.77254903, b: 1, a: 0}
   plateau: {fileID: 1989017383}
   terrain: {fileID: 1989017385}
+  meshHeightMultiplier: 0
+  meshHeightCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  useFallof: 0
+  normalizeMode: 0
+  autoUpdate: 0
   level: 1
 --- !u!114 &1989017385
 MonoBehaviour:
@@ -5541,6 +5568,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textureRender: {fileID: 0}
+  meshFilter: {fileID: 0}
+  meshRenderer: {fileID: 0}
 --- !u!64 &1989017388
 MeshCollider:
   m_ObjectHideFlags: 0

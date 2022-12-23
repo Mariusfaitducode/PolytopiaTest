@@ -14,7 +14,7 @@ public class Personnage : MonoBehaviour
     //private int mouvements; //portée du joueur
     //private int actions; //nbr d'actions du joueur
     
-    private bool _isSelect;
+    public bool _isSelect;
 
     public float vitesse = 150f;
 
@@ -108,7 +108,7 @@ public class Personnage : MonoBehaviour
                 level += 1;
             }
             
-            /*float newHeight = ReturnCase(size).caseCube.transform.position.y * 2;
+            float newHeight = ReturnCase(size).caseCube.transform.position.y * 2;
             
             //transform.position.y = newHeight;
             
@@ -124,7 +124,7 @@ public class Personnage : MonoBehaviour
             {
                 //print("ko");
                 //gameObject.transform.position = lastPos;
-            }*/
+            }
             
             
             //m_rigid.AddForce(m_input * vitesse, ForceMode.Force);
