@@ -547,6 +547,7 @@ MonoBehaviour:
   mapGen: {fileID: 153374594}
   newPlane: {fileID: 0}
   player: {fileID: 618010093}
+  nextScene: {fileID: 0}
   level: 1
 --- !u!64 &153374596
 MeshCollider:
@@ -1861,23 +1862,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3242560871049842965, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99169225
+      value: 0.991762
       objectReference: {fileID: 0}
     - target: {fileID: 3242560871049842965, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.012106663
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3242560871049842965, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.12805285
+      value: -0.12809458
       objectReference: {fileID: 0}
     - target: {fileID: 3242560871049842965, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0015632814
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3242560871049842965, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -1.353
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3242560871049842965, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -1885,7 +1886,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3242560871049842965, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0.355
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4363781713717409803, guid: 1c5c77128c9d9f748bdcce8a8d6ec1d8, type: 3}
       propertyPath: totalObj
@@ -3541,6 +3542,7 @@ MonoBehaviour:
   defaultCam: {fileID: 158829357}
   playerCam: {fileID: 1553839516}
   exit: 0
+  endScene: 0
   level: 0
 --- !u!136 &1164969448
 CapsuleCollider:
@@ -5390,6 +5392,7 @@ GameObject:
   - component: {fileID: 1989017384}
   - component: {fileID: 1989017387}
   - component: {fileID: 1989017385}
+  - component: {fileID: 1989017391}
   m_Layer: 0
   m_Name: Plane_1
   m_TagString: Untagged
@@ -5413,6 +5416,7 @@ MonoBehaviour:
   mapGen: {fileID: 1989017384}
   newPlane: {fileID: 0}
   player: {fileID: 618010093}
+  nextScene: {fileID: 1989017391}
   level: 1
 --- !u!114 &1989017384
 MonoBehaviour:
@@ -5634,6 +5638,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989017382}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1989017391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989017382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a89219696994909bbce11a0d5a690e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2001601760
 GameObject:
   m_ObjectHideFlags: 0

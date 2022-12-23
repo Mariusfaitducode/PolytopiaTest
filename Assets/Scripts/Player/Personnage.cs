@@ -29,6 +29,7 @@ public class Personnage : MonoBehaviour
     public Camera playerCam;
 
     public bool exit;
+    public bool endScene;
 
     public int level;
     

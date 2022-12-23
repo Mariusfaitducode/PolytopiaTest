@@ -15,6 +15,8 @@ public class PlateauJeu : MonoBehaviour
 
     public Personnage player;
 
+    public NextScene nextScene;
+
     private bool validate = false;
     public int level;
 
@@ -30,7 +32,11 @@ public class PlateauJeu : MonoBehaviour
         print(grid.Length);
         
         //InitPlateauJeu();
-        mapGen.Generate3dMap(true, level);
+        if (level != 3)
+        {
+            mapGen.Generate3dMap(true, level);
+        }
+        
         
         //limite.InitLimite();
         
@@ -44,14 +50,17 @@ public class PlateauJeu : MonoBehaviour
         if (player.exit && !validate)
         {
             print("NEXT LEVEL");
+            print("level = "+ level);
             validate = true;
             //CleanTerrain();
-            terrain.SetActive(false);
+            //terrain.SetActive(false);
             
-            newPlane.SetActive(true);
-            gameObject.SetActive(false);
+            //newPlane.SetActive(true);
+            //gameObject.SetActive(false);
+            
+            nextScene.GoToNextScene(level);
 
-            player.GetComponent<Personnage>().plateau = newPlane.GetComponent<PlateauJeu>();
+            //player.GetComponent<Personnage>().plateau = newPlane.GetComponent<PlateauJeu>();
 
             /*if (level == 1)
             {

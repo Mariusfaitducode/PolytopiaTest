@@ -33,6 +33,7 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: 0.000000059604645, y: 0, z: 0}
   m_LocalScale: {x: 67.83298, y: 37.13752, z: 28.887087}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -56,6 +57,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -133,9 +135,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plateau: {fileID: 0}
+  _isSelect: 0
   vitesse: 15
   defaultCam: {fileID: 0}
   playerCam: {fileID: 0}
+  exit: 0
+  endScene: 0
+  level: 0
 --- !u!114 &4363781713717409803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +154,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2559994653c2ede41a73b907534bb9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalObj: 0
+  actualize: 0
+  itemDispPF: {fileID: 0}
+  collection: []
 --- !u!114 &7706512807102441724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,5 +170,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ba2567c30dbf341bdcb60da47c8834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   invent: {fileID: 0}
-  cutTree: 0
+  selected:
+    name: 
+    quantite: {fileID: 0}
+    isSelect: {fileID: 0}
+    activate: {fileID: 0}
+  firstAction: 0
+  edit: {fileID: 0}
+  fox: {fileID: 0}
