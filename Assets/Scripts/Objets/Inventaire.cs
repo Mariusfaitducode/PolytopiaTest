@@ -60,11 +60,11 @@ public class Inventaire : MonoBehaviour
         for (int i = 0; i < collection.Length; i++)
         {
             Item var = collection[i];
-            if (var.name.Equals(item.name))
+            if (var.name.Equals(item.prefab.tag))
             {
                 isInList = true;
                 collection[i].quantite += 1;
-                print(var.quantite);
+                //print(var.quantite);
             }
         }
 
@@ -86,7 +86,7 @@ public class Inventaire : MonoBehaviour
             {
                 isInList = true;
                 collection[i].quantite -= 1;
-                print(var.quantite);
+                //print(var.quantite);
             }
         }
 

@@ -23,7 +23,7 @@ public class PlateauJeu : MonoBehaviour
         int size = Constants.GetConstant(level);
         
         print("size =" + size);
-        print(size);
+        //print(size);
         
             
         grid = new Case[size, size];
@@ -43,7 +43,7 @@ public class PlateauJeu : MonoBehaviour
         //print(player.exit);
         if (player.exit && !validate)
         {
-            print("second level");
+            print("NEXT LEVEL");
             validate = true;
             //CleanTerrain();
             terrain.SetActive(false);
@@ -73,5 +73,20 @@ public class PlateauJeu : MonoBehaviour
     public void SetPlateau()
     {
         
+    }
+
+    public int CountBioCase()
+    {
+        int count = 0;
+
+        foreach (Case var in grid)
+        {
+            if (var.bio)
+            {
+                count += 1;
+            }
+        }
+
+        return count;
     }
 }

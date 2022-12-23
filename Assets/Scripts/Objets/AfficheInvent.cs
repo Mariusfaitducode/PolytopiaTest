@@ -13,14 +13,18 @@ public class AfficheInvent : MonoBehaviour
         public string name;
         public TextMeshProUGUI quantite;
         public RawImage isSelect;
-        
+        public GameObject activate;
     }
     
     public ItemOnScreen[] collection;
+
+    public ItemOnScreen bio;
     
     public Inventaire invent;
 
     public CaseActions action;
+
+    public EditObject edit;
 
     public InventaireButton button;
 
@@ -39,11 +43,14 @@ public class AfficheInvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (action.GetCutTree() || action.GetPutTree())
+        /*if (action.GetCutTree() || action.GetPutTree())
         {
             print("actualize");
-            ActualizeItems();
-        }
+            
+            action.SetCutTree(false);
+            action.SetPutTree(false);
+        }*/
+        ActualizeItems();
         SelectItem();
     }
     
@@ -57,12 +64,28 @@ public class AfficheInvent : MonoBehaviour
             
             if (var.name != default)
             {
-                Inventaire.Item item = invent.FindWithName(var.name);
+                if (var.name == "fox" && !var.quantite.text.Equals("0") && !var.activate.activeSelf)
+                {
+                    print("fox is here");
+                    
+                    //active l'item fox
+                    var.activate.SetActive(true);
+                }
+                else
+                {
+                    Inventaire.Item item = invent.FindWithName(var.name);
 
-                collection[i].quantite.text = item.quantite.ToString();
+                    collection[i].quantite.text = item.quantite.ToString();
+                }
+                
             }
 
             
+        }
+
+        if (bio.isSelect.enabled)
+        {
+            bio.quantite.text = edit.countBio.ToString()+"/100";
         }
         //action. = false;
     }

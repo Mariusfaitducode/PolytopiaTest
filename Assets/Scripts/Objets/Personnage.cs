@@ -101,7 +101,6 @@ public class Personnage : MonoBehaviour
 
             height = transform.position.y;
 
-
             if (exit)
             {
                 transform.position = new Vector3(0, 60, 0);
@@ -109,7 +108,7 @@ public class Personnage : MonoBehaviour
                 level += 1;
             }
             
-            float newHeight = ReturnCase(size).caseCube.transform.position.y * 2;
+            /*float newHeight = ReturnCase(size).caseCube.transform.position.y * 2;
             
             //transform.position.y = newHeight;
             
@@ -125,7 +124,7 @@ public class Personnage : MonoBehaviour
             {
                 //print("ko");
                 //gameObject.transform.position = lastPos;
-            }
+            }*/
             
             
             //m_rigid.AddForce(m_input * vitesse, ForceMode.Force);

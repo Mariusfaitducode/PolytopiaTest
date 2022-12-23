@@ -16,12 +16,8 @@ public class MapGeneratorEditor : Editor
         }
 
         if (GUILayout.Button ("Generate")){
-            //mapGen.GenerateMap ();
+            mapGen.GenerateMap ();
             //mapGen.Generate3dMap();
         }
-        /*
-        if (GUILayout.Button ("Delete")){
-            mapGen.plateau.CleanTerrain();
-        }*/
     }
 }

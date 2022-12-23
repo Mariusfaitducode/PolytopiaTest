@@ -24,10 +24,17 @@ public class CaseActions : MonoBehaviour
 
     public EditObject edit;
 
+    public GameObject fox;
+
+    private bool putFox;
+
    
 
     public bool GetCutTree(){return cutTree;}
     public bool GetPutTree(){return putTree;}
+    
+    public void SetCutTree(bool cut){cutTree = cut;}
+    public void SetPutTree(bool put){putTree = put;}
 
     void Start()
     {
@@ -42,13 +49,18 @@ public class CaseActions : MonoBehaviour
     {
         
        PutObject();
+       if (player.level == 2)
+       {
+           PutFox();
+           TransformationFox();
+       }
+       
        
     }
 
     public void OnTriggerStay(Collider other)
     {
-        //print("CUUUT THIS TREE");
-        //print(other);
+        
         TakeObject(other);
         
     }
@@ -57,18 +69,38 @@ public class CaseActions : MonoBehaviour
     {
         //cutTree = false;
         if (selected.name == default && Input.GetKey(KeyCode.Space) &&
-            !other.gameObject.CompareTag("CaseCube") && !other.gameObject.CompareTag("Sortie"))
+                      !other.gameObject.CompareTag("CaseCube") && !other.gameObject.CompareTag("Sortie"))
         {
+            print("tag = "+other.tag+"  name = "+other.name);
+            if (other.gameObject.layer.Equals(20)) //layer animal 
+            {
+                print("catch fox");
+                Inventaire.Item item = invent.FindWithName("fox");
+                
+                invent.IncrementQuantite(item);
+            
+                //invent.DispList();
+            
+                Destroy(fox); //destroy fox
+                cutTree = true;
+
+                player.exit = true;
+            }
+            else
+            {
+                Inventaire.Item item = invent.FindWithName(other.gameObject.tag);
+                //print(item.name);
+
+                invent.IncrementQuantite(item);
+            
+                //invent.DispList();
+            
+                Destroy(other.gameObject);
+            }
+            
             //print("destroy");
 
-            Inventaire.Item item = invent.FindWithName(other.gameObject.tag);
-            //print(item.name);
-
-            invent.IncrementQuantite(item);
             
-            //invent.DispList();
-            
-            Destroy(other.gameObject);
 
             //invent.actualize = true;
 
@@ -80,7 +112,7 @@ public class CaseActions : MonoBehaviour
     {
         lastAction = true;
         //  putTree = false;
-        if (selected.name != default)
+        if (selected.name != default && selected.name != "fox")
         {
             if (Input.GetKey(KeyCode.Space) && firstAction)
             {
@@ -118,6 +150,58 @@ public class CaseActions : MonoBehaviour
             }
 
             
+        }
+    }
+
+    public void PutFox()
+    {
+        lastAction = true;
+        
+        
+        //  putTree = false;
+        if (selected.name == "fox")
+        {
+            print("should put fox");
+            if (Input.GetKey(KeyCode.Space))
+            {
+                print("okk");
+                Inventaire.Item obj = invent.FindWithName(selected.name);
+                print(obj.name);
+
+                if (obj.quantite > 0)
+                {
+                    obj.prefab.SetActive(true);
+                    obj.prefab.transform.position = gameObject.transform.position;
+                    
+                    invent.DecrementQuantite(obj);
+                    putTree = true;
+                    firstAction = false;
+                    lastAction = false;
+                    //objet.transform.parent = gameObject.transform;
+                }
+            }
+            else if (lastAction && !Input.GetKey(KeyCode.Space))
+            {
+                
+                firstAction = true;
+            }
+
+            
+        }
+    }
+
+    public void TransformationFox()
+    {
+        if (selected.name == "fox")
+        {
+            print("should put fox");
+            if (Input.GetKey(KeyCode.Space))
+            {
+                fox.SetActive(true);
+                fox.transform.position = gameObject.transform.position;
+
+                gameObject.SetActive(false);
+            }
         }
     }
 }

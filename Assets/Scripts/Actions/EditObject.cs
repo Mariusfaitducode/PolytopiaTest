@@ -5,8 +5,12 @@ using UnityEngine;
 public class EditObject : MonoBehaviour
 {
     private InitTerrain terrain;
+
+    public int countBio = 0;
     
     public CaseType.TerrainType[] regions;
+
+    public GameObject foxPrefab;
     
     private System.Random ran = new System.Random();
 
@@ -37,15 +41,40 @@ public class EditObject : MonoBehaviour
         {
             for (int j = posY - 1; j <= posY + 1; j++)
             {
-                ChangeColourCube(plateau, i, j);
+                BioColourCube(plateau, i, j);
 
             }
         }
+
+        countBio = plateau.CountBioCase();
+        print("count biocase = "+countBio);
+        if (countBio >= Constants.bioCase)
+        {
+            //End bio --> Catch fox
+            
+            print("instantiate fox");
+            foxPrefab.SetActive(true);
+            
+        }
+        
     }
 
-    public void ChangeColourCube(PlateauJeu plateau, int i, int j)
+    public void BioColourCube(PlateauJeu plateau, int l, int c)
     {
-        plateau.grid[i, j].caseCube.GetComponent<MeshRenderer>().material.color = Color.green;
+        float currentHeight = plateau.grid[l, c].surfaceHeight / plateau.grid[l, c].altitude;
+
+        for (int i = 0; i < regions.Length; i++)
+        {
+            print(currentHeight);
+            if (currentHeight <= regions[i].height)
+            {
+                plateau.grid[l, c].caseCube.GetComponent<MeshRenderer>().material.color = regions[i].colour;
+                break;
+            }
+
+            
+        }
+        plateau.grid[l, c].bio = true;
     }
     
     //public void GiveColorWithHeight()
